@@ -38,7 +38,7 @@ Once the commands above are executed, the program will automatically search and 
 Please select the anime that you are searching for in number: <enter 1, 2, or 3>
 ```
 
-For retrieved dictionaries from the the step above by using `.getAnimeInfo()` or `.getCharacterInfo()`, the data has be parsed and reformatted into more readable and easily accessible json objects. The **keys** to the correspounding dictionaries are as belows:
+For retrieved dictionaries from the the step above by using `.getAnimeInfo()` or `.getCharacterInfo()`, the data has be parsed and reformatted into more readable and easily accessible json objects. The **keys** to the correspounding dictionaries are as follows:
 ```ruby
 #ANIME                 #CHARACTER
 - name_romaji          - first_name
