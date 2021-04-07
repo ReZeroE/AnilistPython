@@ -38,7 +38,7 @@ Once the commands above are executed, the program will automatically search and 
 Please select the anime that you are searching for in number: <enter 1, 2, or 3>
 ```
 
-For retrieved dictionaries from the the step above by using `.getAnimeInfo()` or `.getCharacterInfo()`, the data has be parsed and reformatted into more readable and easily accessible json objects. The **keys** to the correspounding information are of below:
+For retrieved dictionaries from the the step above by using `.getAnimeInfo()` or `.getCharacterInfo()`, the data has be parsed and reformatted into more readable and easily accessible json objects. The **keys** to the correspounding dictionaries are as belows:
 ```ruby
 #ANIME                 #CHARACTER
 - name_romaji          - first_name
@@ -58,9 +58,9 @@ For retrieved dictionaries from the the step above by using `.getAnimeInfo()` or
 ```
 One simple example would be:
 ```Crystal
->>> extracted_data = anilist.getAnimeInfo("Tensei Slime")
->>> print(extracted_data["name_romaji"])
-Tensura Nikki: Tensei Shitara Slime Datta Ken
+>>> extracted_data = anilist.getAnimeInfo("Tensei Slime")     # retrieves dictionary containing anime data
+>>> print(extracted_data["name_romaji"])                      # applies the key "name_romaji"
+Tensura Nikki: Tensei Shitara Slime Datta Ken                 # Ta-Da!
 ```
 <br/>
 
