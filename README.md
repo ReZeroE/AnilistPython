@@ -6,8 +6,6 @@ This library is currently developed by a team of one and many operations in the 
 
 Currently, only anime and character data retrival has been optimized for beginner-friendly data parsing. 
 
-Hi Chimp!
-
 ## How to use?
 **Step One:** Library Installation
 ``` ruby
@@ -74,18 +72,18 @@ Retrieved data takes the form of json objects or lists of json objects. In order
 Note that it is possible to directly call functions from the subclasses of the driver code in `ExtractID` and `ExtractInfo` with the Anilist instance.
 ```ruby
 # RETRIEVING JSON OBJ CONTAINING DATA
-anilist.extractInfo.anime(21610) # Return data on Okusama ga Seitokaichou
-anilist.extractInfo.manga(64127) # Return data on Mahouka Koukou no Rettousei
-anilist.extractInfo.staff(121963) # Return data on Keisuke Nishijima (Nisizima)
-anilist.extractInfo.studio(94) # Return data on Telecom Animation Film
-anilist.extractInfo.review(2113) # Return review #2113 and format the review body in HTML
+anilist.extractInfo.anime(105333)           # Return data Dr.Stone
+anilist.extractInfo.manga(85737)            # Return data on Re:Zero kara Hajimeru Isekai Seikatsu
+anilist.extractInfo.staff(103509)           # Return data on Hiroyuki Sawano
+anilist.extractInfo.studio(43)              # Return data on ufotable
+anilist.extractInfo.review(2113)            # Return review #2113 and format the review body in HTML
 
 # RETRIEVING JSON OBJ CONTAINING ID NUM
-anilist.extractID.anime("King") # Anime search results for King.
-anilist.extractID.manga("King") # Manga search results for King.
-anilist.extractID.character("Kei") # Character search results for Kei.
-anilist.extractID.staff("Keisuke") # Staff search results for Keisuke.
-anilist.extractID.studio("Ghibli") # Studio search result for Ghibli. (There's only one)
+anilist.extractID.anime("Owari No Seraph")  # Anime search results for King.
+anilist.extractID.manga("Sakurasou")        # Manga search results for Sakurasou.
+anilist.extractID.character("Subaru")       # Character search results for Subaru.
+anilist.extractID.staff("Keisuke")          # Staff search results for Keisuke.
+anilist.extractID.studio("Ghibli")          # Studio search result for Ghibli.
 ```
 The functions above returns raw json objects that requires extensive parsing before it can be used. Note that `.extractID` does NOT directly return the ID of the given item. Instead, it returns a json object that contains the item's ID number. The only useful information from `.extractID` is the ID number of the provided item. All other data retrieved from `ExtractID` can be found in `ExtractInfo` with the latter having more details.
 
