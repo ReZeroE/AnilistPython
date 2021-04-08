@@ -21,14 +21,14 @@ anilist = Anilist()
 Starting off, there are a set of commands optimized for auto json parsing. Currently, they are only available for anime and characters. All of the following functions uses Anilist's new GraphQL API.
 ```ruby
 # ANIME
-anilist.getAnimeInfo("Code Geass")             # returns a dictionary with anime info (parsed)
-anilist.getAnimeID("ReZero")                   # returns Re:Zero's ID on Anilist
-anilist.printAnimeInfo("Madoka Magica")        # prints all information regarding the anime Madoka Magica
+anilist.getAnimeInfo("Code Geass")          # returns a dictionary with anime info (parsed)
+anilist.getAnimeID("ReZero")                # returns Re:Zero's ID on Anilist
+anilist.printAnimeInfo("Madoka Magica")     # prints all information regarding the anime Madoka Magica
 
 #CHARACTER
-anilist.getCharacterInfo("Emilia")             # returns a dictionary containing the info about Emilia-tan (parsed)
-anilist.getCharacterID("Milim")                # returns character Milim's ID on Anilist
-anilist.printCharacterInfo("Misaka Mikoto")    # prints all information regarding the character Misaka Mikoto (desc not parsed)
+anilist.getCharacterInfo("Emilia")          # returns a dictionary containing the info about Emilia-tan (parsed)
+anilist.getCharacterID("Milim")             # returns character Milim's ID on Anilist
+anilist.printCharacterInfo("Misaka Mikoto") # prints all information regarding the character Misaka Mikoto (desc not parsed)
 ```
 Once the commands above are executed, the program will automatically search and retrieve the request information. When multiple targets are found, **three** results will be shown in the terminal. Pick your desired character to retrieve their information.
 ```ruby
