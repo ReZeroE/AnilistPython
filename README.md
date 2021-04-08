@@ -79,7 +79,7 @@ anilist.extractInfo.studio(43)              # Return data on ufotable
 anilist.extractInfo.review(2113)            # Return review #2113 and format the review body in HTML
 
 # RETRIEVING JSON OBJ CONTAINING ID NUM
-anilist.extractID.anime("Owari No Seraph")  # Anime search results for King.
+anilist.extractID.anime("Owari No Seraph")  # Anime search results for Owari No Seraph.
 anilist.extractID.manga("Sakurasou")        # Manga search results for Sakurasou.
 anilist.extractID.character("Subaru")       # Character search results for Subaru.
 anilist.extractID.staff("Keisuke")          # Staff search results for Keisuke.
