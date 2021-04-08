@@ -72,7 +72,7 @@ Retrieved data takes the form of json objects or lists of json objects. In order
 Note that it is possible to directly call functions from the subclasses of the driver code in `ExtractID` and `ExtractInfo` with the Anilist instance.
 ```ruby
 # RETRIEVING JSON OBJ CONTAINING DATA
-anilist.extractInfo.anime(105333)           # Return data Dr.Stone
+anilist.extractInfo.anime(105333)           # Return data on Dr.Stone
 anilist.extractInfo.manga(85737)            # Return data on Re:Zero kara Hajimeru Isekai Seikatsu
 anilist.extractInfo.staff(103509)           # Return data on Hiroyuki Sawano
 anilist.extractInfo.studio(43)              # Return data on ufotable
