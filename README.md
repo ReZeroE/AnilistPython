@@ -6,6 +6,8 @@ This library is currently developed by a team of one and many operations in the 
 
 Currently, only anime and character data retrival has been optimized for beginner-friendly data parsing. 
 
+**Ver 0.0.9 Update** - AniList bot support has been added!
+
 ## How to use?
 **Step One:** Library Installation
 ``` ruby
