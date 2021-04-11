@@ -1,9 +1,13 @@
+'''
+File reserved for bot functions. Currently Under Development
+'''
 import time
 import requests
 from .extractInfo import ExtractInfo
 from .extractID import ExtractID
 
-class Anilist:
+
+class botSupport:
     """
         Initialize a new instance to the Anilist driver API.
         The instance is responsible for all read operations. 
@@ -29,41 +33,25 @@ class Anilist:
 
         self.extractInfo = ExtractInfo(self.access, activated)
         self.extractID = ExtractID(self.access, activated)
+        self.activated = activated
 
-
-    # DRIVER SUPPORTED FUNCTIONS ==============================================================
-    def getAnimeID(self, anime_name):
+    # ANIME ===============================================================================================================
+    def getAnimeID(self, anime_name) -> int:
         '''
-        Retrieves the anime ID on Anilist.
+        Retrieves the anime ID on Anilist. (First match)
 
         :param anime_name: The name of the anime
-        :return: The anime's ID on Anilist. Returns -1 if an error is caught.
+        :return: The anime's ID on Anilist. Returns the first match.
         :rtype: int
         '''
-
+        anime_list = []
         data = self.extractID.anime(anime_name)
-        max_result = 0
-        counter = 0 # number of displayed results from search
         for i in range(len(data['data']['Page']['media'])):
             curr_anime = data['data']['Page']['media'][i]['title']['romaji']
-            print(f"{counter + 1}. {curr_anime}")
-            max_result = i + 1
-            counter += 1
-        
-        if counter != 1: # only one result found if counter == 1
-            try:
-                user_input = int(input("Please select the anime that you are searching for in number: "))
-            except TypeError:
-                print(f"Your input is incorrect! Please try again!")
-                return -1
+            anime_list.append(curr_anime)
 
-            if user_input > max_result or user_input <= 0:
-                print("Your input does not correspound to any of the anime displayed!")
-                return -1
-        else:
-            user_input = 1
-
-        return data['data']['Page']['media'][user_input - 1]['id']
+        # returns the first anime found
+        return data['data']['Page']['media'][0]['id']
 
 
     def getAnimeInfo(self, anime_name) -> dict:
@@ -129,30 +117,67 @@ class Anilist:
 
         return anime_dict
 
-    def printAnimeInfo(self, anime_name):
+
+    def getAnimeInfoWithID(self, anime_id):
         '''
-        Displays all anime data.
-        Auto formats the displayed version of the data.
+        Retrieve anime info in the form of a json object given the ID.
+        Retrieve json object will be reformatted in a easily accessable json obj.
 
-        :param anime_name: The name of the anime
+        :param anime_id: The ID of the anime
+        :return: parsed dict containing the anime's data
+        :rtype: dict
         '''
 
-        ani_dict = self.getAnimeInfo(anime_name)
-        if ani_dict == None:
-            print('Name Error')
-        else:
-            arr = ["Name(romaji)", "Name(Eng)", "Started Airing On", "Ended On", "Cover Image", "Banner Image",
-            "Airing Format", "Airing Status", "Total Ep Count", "Season", "Description", "Ave. Score", "Genres",
-            "Next Ep Airing Date"]
-            counter = 0
+        data = self.extractInfo.anime(anime_id)
+        media_lvl = data['data']['Media']
 
-            print("====================================================================")
-            print("============================ ANIME INFO ============================")
-            for key, value in ani_dict.items():
-                print(f"{arr[counter]}: {value}")
-                counter += 1
+        name_romaji = media_lvl['title']['romaji']
+        name_english = media_lvl['title']['english']
 
-    # CHARACTER =================================================================================================
+        start_year = media_lvl['startDate']['year']
+        start_month = media_lvl['startDate']['month']
+        start_day = media_lvl['startDate']['day']
+
+        end_year = media_lvl['endDate']['year']
+        end_month = media_lvl['endDate']['month']
+        end_day = media_lvl['endDate']['day']
+
+        starting_time = f'{start_month}/{start_day}/{start_year}'
+        ending_time = f'{end_month}/{end_day}/{end_year}'
+
+        cover_image = media_lvl['coverImage']['large']
+        banner_image = media_lvl['bannerImage']
+
+        airing_format = media_lvl['format']
+        airing_status = media_lvl['status']
+        airing_episodes = media_lvl['episodes']
+        season = media_lvl['season']
+
+        desc = media_lvl['description']
+
+        average_score = media_lvl['averageScore']
+        genres = media_lvl['genres']
+
+        next_airing_ep = media_lvl['nextAiringEpisode']
+
+        anime_dict = {"name_romaji": name_romaji,
+                    "name_english": name_english,
+                    "starting_time": starting_time,
+                    "ending_time": ending_time,
+                    "cover_image": cover_image,
+                    "banner_image": banner_image,
+                    "airing_format": airing_format,
+                    "airing_status": airing_status,
+                    "airing_episodes": airing_episodes,
+                    "season": season,
+                    "desc": desc,
+                    "average_score": average_score,
+                    "genres": genres,
+                    "next_airing_ep": next_airing_ep,}
+
+        return anime_dict
+    
+    # CHARACTER ===========================================================================================================
     def getCharacterID(self, character_name):
         '''
         Retrieves the character ID on Anilist.
@@ -162,36 +187,15 @@ class Anilist:
         :rtype: int
         '''
 
-        max_result = 0
-        counter = 0 # number of displayed results from search
+        character_list = []
         data = self.extractID.character(character_name)
         for i in range(len(data['data']['Page']['characters'])):
             first_name = data['data']['Page']['characters'][i]['name']['first']
             last_name = data['data']['Page']['characters'][i]['name']['last']
-            max_result = i + 1
+            character_list.append([first_name, last_name])
 
-            if last_name == None:
-                print(f"{counter + 1}. {first_name}")
-            elif first_name == None:
-                print(f"{counter + 1}. {last_name}")
-            else:
-                print(f'{counter + 1}. {last_name}, {first_name}')
-            counter += 1
+        return data['data']['Page']['characters'][0]['id']
 
-        if counter != 1: # only one result found if counter == 1
-            try:
-                user_input = int(input("Please select the character that you are searching for in number: "))
-            except TypeError:
-                print(f"Your input is incorrect! Please try again!")
-                return -1
-            
-            if user_input > max_result or user_input <= 0:
-                print("Your input does not correspound to any of the characters!")
-                return -1
-        else:
-            user_input = 1
-
-        return data['data']['Page']['characters'][user_input - 1]['id']
 
     def getCharacterInfo(self, character_name):
         '''
@@ -225,23 +229,32 @@ class Anilist:
 
         return character_dict
 
-    def printCharacterInfo(self, character_name):
+
+    def getCharacterInfoWithID(self, character_id):
         '''
-        Displays all character data.
-        Auto formats the displayed version of the data.
+        Retrieve character info in the form of a json object given the character's ID.
+        Retrieve json object will be reformatted in a easily accessable json obj.
 
-        :param character_name: The character of the anime
+        :param character_id: The ID of the character
+        :return: parsed dict containing the character's data
+        :rtype: dict
         '''
 
-        char_dict = self.getCharacterInfo(character_name)
-        if char_dict == None:
-            print("Character Search Error")
-        else:
-            arr = ["First Name", "Last Name", "Japanese Name", "Description", "Image"]
-            counter = 0
+        data = self.extractInfo.character(character_id)
+        character_lvl = data['data']['Character']
 
-            print("========================================================================")
-            print("============================ CHARACTER INFO ============================")
-            for key, value in char_dict.items():
-                print(f"{arr[counter]}: {value}")
-                counter += 1
+        first_name = character_lvl['name']['first']
+        last_name = character_lvl['name']['last']
+        native_name = character_lvl['name']['native']
+
+        desc = character_lvl['description']
+        image = character_lvl['image']['large']
+
+        character_dict = {"first_name": first_name,
+                        "last_name": last_name,
+                        "native_name": native_name,
+                        "desc": desc,
+                        "image": image,}
+
+        return character_dict
+    

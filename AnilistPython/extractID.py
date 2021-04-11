@@ -4,8 +4,8 @@ from .QSFile import QSData
 qsObj = QSData()
 
 class ExtractID:
-    def __init__(self, settings, status):
-        self.settings = settings
+    def __init__(self, access, status):
+        self.access = access
         self.status = status # Boolean value used for bots
 
     def anime(self, term, page = 1, perpage = 3):
@@ -22,8 +22,8 @@ class ExtractID:
         """
 
         preset = {"query": term, "page": page, "perpage": perpage}
-        req = requests.post(self.settings['apiurl'],
-                          headers=self.settings['header'],
+        req = requests.post(self.access['apiurl'],
+                          headers=self.access['header'],
                           json={'query': qsObj.animeIDQS, 'variables': preset})
 
         if req.status_code != 200:
@@ -53,8 +53,8 @@ class ExtractID:
         """
 
         preset = {"query": term, "page": page, "perpage": perpage}
-        req = requests.post(self.settings['apiurl'],
-                          headers=self.settings['header'],
+        req = requests.post(self.access['apiurl'],
+                          headers=self.access['header'],
                           json={'query': qsObj.characterIDQS, 'variables': preset})
 
         if req.status_code != 200:
@@ -83,8 +83,8 @@ class ExtractID:
         """
 
         preset = {"query": term, "page": page, "perpage": perpage}
-        req = requests.post(self.settings['apiurl'],
-                          headers=self.settings['header'],
+        req = requests.post(self.access['apiurl'],
+                          headers=self.access['header'],
                           json={'query': qsObj.mangaIDQS, 'variables': preset})
 
         if req.status_code != 200:
@@ -113,8 +113,8 @@ class ExtractID:
         """
 
         preset = {"query": term, "page": page, "perpage": perpage}
-        req = requests.post(self.settings['apiurl'],
-                          headers=self.settings['header'],
+        req = requests.post(self.access['apiurl'],
+                          headers=self.access['header'],
                           json={'query': qsObj.staffIDQS, 'variables': preset})
 
         if req.status_code != 200:
@@ -143,8 +143,8 @@ class ExtractID:
         """
 
         preset = {"query": term, "page": page, "perpage": perpage}
-        req = requests.post(self.settings['apiurl'],
-                          headers=self.settings['header'],
+        req = requests.post(self.access['apiurl'],
+                          headers=self.access['header'],
                           json={'query': qsObj.studioIDQS, 'variables': preset})
 
         if req.status_code != 200:
