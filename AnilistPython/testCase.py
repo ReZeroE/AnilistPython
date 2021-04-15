@@ -1,5 +1,8 @@
-from .botSupport import botSupport
-anilistBot = botSupport()
+from .botSupport import botSupportClass
+anilistBot = botSupportClass()
+
+from .__init__ import Anilist
+instance = Anilist()
 
 class TestCase:
     '''
@@ -8,6 +11,7 @@ class TestCase:
     def __init__(self):
         pass
 
+    # BOT SUPPORT ====================================================================================
     def runTests(self):
         self.test_botAnimeID()
         self.test_botAnimeInfo()
@@ -46,6 +50,17 @@ class TestCase:
         assert data["native_name"] == "土御門 春虎"
         assert data["image"] == "https://s4.anilist.co/file/anilistcdn/character/large/42314.jpg"
 
+    # ANILIST =============================================================================================================
+    def test_anilistAnimeInfo(self):
+        data = instance.getANimeInfo("Konosuba S1")
+        assert data["name_romaji"] == "Kono Subarashii Sekai ni Shukufuku wo! 2"
+        assert data["name_english"] == "KONOSUBA -God's blessing on this wonderful world! 2"
+        assert data["starting_time"] == "1/12/2017"
+        assert data["ending_time"] == "3/16/2017"
+        assert data["airing_episodes"] == 10
+
 testCase = TestCase()
 testCase.runTests()
-print("TEST COMPLETED! NO ERRORS FOUND!")
+print('=====================================')
+print("|  TEST COMPLETED! NO ERRORS FOUND! |")
+print('=====================================')

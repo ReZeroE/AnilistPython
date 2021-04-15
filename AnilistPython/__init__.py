@@ -50,7 +50,7 @@ class Anilist:
             max_result = i + 1
             counter += 1
         
-        if counter != 1: # only one result found if counter == 1
+        if counter > 1: # only one result found if counter == 1
             try:
                 user_input = int(input("Please select the anime that you are searching for in number: "))
             except TypeError:
@@ -60,6 +60,9 @@ class Anilist:
             if user_input > max_result or user_input <= 0:
                 print("Your input does not correspound to any of the anime displayed!")
                 return -1
+        elif counter == 0:
+            print(f'No search result has been found for the anime "{anime_name}"!')
+            return -1
         else:
             user_input = 1
 
@@ -178,7 +181,7 @@ class Anilist:
                 print(f'{counter + 1}. {last_name}, {first_name}')
             counter += 1
 
-        if counter != 1: # only one result found if counter == 1
+        if counter > 1: # only one result found if counter == 1
             try:
                 user_input = int(input("Please select the character that you are searching for in number: "))
             except TypeError:
@@ -188,6 +191,9 @@ class Anilist:
             if user_input > max_result or user_input <= 0:
                 print("Your input does not correspound to any of the characters!")
                 return -1
+        elif counter == 0:
+            print(f'No search result has been found for the character "{character_name}"!')
+            return -1
         else:
             user_input = 1
 

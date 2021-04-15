@@ -7,7 +7,7 @@ from .extractInfo import ExtractInfo
 from .extractID import ExtractID
 
 
-class botSupport:
+class botSupportClass:
     """
         Initialize a new instance to the Anilist driver API.
         The instance is responsible for all read operations. 
@@ -51,7 +51,12 @@ class botSupport:
             anime_list.append(curr_anime)
 
         # returns the first anime found
-        return data['data']['Page']['media'][0]['id']
+        try:
+            anime_ID = data['data']['Page']['media'][0]['id']
+        except IndexError:
+            raise IndexError('Anime Not Found')
+
+        return anime_ID
 
 
     def getAnimeInfo(self, anime_name) -> dict:
@@ -194,7 +199,12 @@ class botSupport:
             last_name = data['data']['Page']['characters'][i]['name']['last']
             character_list.append([first_name, last_name])
 
-        return data['data']['Page']['characters'][0]['id']
+        try:
+            character_ID = data['data']['Page']['characters'][0]['id']
+        except IndexError:
+            raise IndexError('Character Not Found')
+
+        return character_ID
 
 
     def getCharacterInfo(self, character_name):
