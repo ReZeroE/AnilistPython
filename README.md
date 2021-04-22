@@ -8,6 +8,10 @@ Currently, only anime and character data retrival has been optimized for beginne
 
 **Ver 0.1.0 Update** - AniList bot support has been added!
 
+**Upcoming features planned for Ver 0.1.2 or later**
+ - Anime Genre Search (Not supported by the AniList API)
+ - Manga Search Bot support
+
 ## How to use?
 **Step One:** Library Installation
 ``` ruby
