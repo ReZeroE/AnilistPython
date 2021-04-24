@@ -114,3 +114,30 @@ In addition to that, pagination is taken cared of by the new API. By default you
 ```ruby
 extractID(term, page = 1, perpage = 3)
 ```
+
+## Bot Support
+The bot support utilizes the features presented above with minor edits for better usability. Currently bot support functions only include anime and character search. Manga search is under development. The file has been completely tested and the test cases are supplied along with the module.
+
+Instance creation for bot functions:
+```ruby
+from AnilistPython.botSupport import botSupportClass
+anilist_bot = botSupportClass()
+```
+Usage:
+```ruby
+# ANIME
+anilist_bot.getAnimeInfo("Demon Slayer")        # returns a dictionary with anime info (parsed)
+anilist_bot.getAnimeInfoWithID(105333)          # returns a dictionary with anime info (parsed) - with ID
+anilist_bot.getAnimeID("Eighty-Six")            # returns Re:Zero's ID on Anilist
+
+#CHARACTER
+anilist_bot.getCharacterInfo("Emilia")          # returns a dictionary containing the info about Emilia-tan (parsed)
+anilist_bot.getCharacterInfoWithID(93284)       # returns a dictionary containing the info about a character with ID (parsed)
+anilist_bot.getCharacterID("Milim")             # returns character Milim's ID on Anilist
+```
+Note that bot support will return the result of the **first match** through searches. If no results are found, Nonetype will be returned for info requests and -1 will be returned for ID request. For more details regarding the functions, please read the in-file comments.
+
+## Credits
+Lead Developer: Kevin L. (ReZeroK)
+
+Special thanks to AniList's ApiV2 GraphQL Dev team for making this possible. 
