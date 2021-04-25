@@ -63,7 +63,7 @@ For retrieved dictionaries from the the step above by using `.getAnimeInfo()` or
 - next_airing_ep
 ```
 One simple example would be:
-```ruby
+```crystal
 >>> extracted_data = anilist.getAnimeInfo("Tensei Slime")     # retrieves dictionary containing anime data
 >>> print(extracted_data["name_romaji"])                      # applies the key "name_romaji"
 Tensura Nikki: Tensei Shitara Slime Datta Ken                 # Ta-Da!
