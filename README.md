@@ -14,18 +14,18 @@ Currently, only anime and character data retrival has been optimized for beginne
 
 ## How to use?
 **Step One:** Library Installation
-``` ruby
+``` python
 pip install AnilistPython==0.1.0
 ```
 **Step Two:** Instance Creation
-```ruby
+```python
 from AnilistPython import Anilist
 anilist = Anilist()
 ```
 **Step Three**: Usage
 
 Starting off, there are a set of commands optimized for auto json parsing. Currently, they are only available for anime and characters. All of the following functions uses Anilist's new GraphQL API.
-```ruby
+```python
 # ANIME
 anilist.getAnimeInfo("Code Geass")          # returns a dictionary with anime info (parsed)
 anilist.getAnimeID("ReZero")                # returns Re:Zero's ID on Anilist
@@ -63,7 +63,7 @@ For retrieved dictionaries from the the step above by using `.getAnimeInfo()` or
 - next_airing_ep
 ```
 One simple example would be:
-```Crystal
+```ruby
 >>> extracted_data = anilist.getAnimeInfo("Tensei Slime")     # retrieves dictionary containing anime data
 >>> print(extracted_data["name_romaji"])                      # applies the key "name_romaji"
 Tensura Nikki: Tensei Shitara Slime Datta Ken                 # Ta-Da!
@@ -76,7 +76,7 @@ Tensura Nikki: Tensei Shitara Slime Datta Ken                 # Ta-Da!
 Retrieved data takes the form of json objects or lists of json objects. In order to retrieve the desired data, title/item ID is required. Data extraction does not accept string inputs and can only take int parameters as ID's. The process of chaining ID request and data request together has been included in the optimized functions above, but this is not built-in if you would like to directly request for data blocks in the form or orginial/raw json objects.  
 
 Note that it is possible to directly call functions from the subclasses of the driver code in `ExtractID` and `ExtractInfo` with the Anilist instance.
-```ruby
+```python
 # RETRIEVING JSON OBJ CONTAINING DATA
 anilist.extractInfo.anime(105333)           # Return data on Dr.Stone
 anilist.extractInfo.manga(85737)            # Return data on Re:Zero kara Hajimeru Isekai Seikatsu
@@ -94,7 +94,7 @@ anilist.extractID.studio("Ghibli")          # Studio search result for Ghibli.
 The functions above returns raw json objects that requires extensive parsing before it can be used. Note that `.extractID` does NOT directly return the ID of the given item. Instead, it returns a json object that contains the item's ID number. The only useful information from `.extractID` is the ID number of the provided item. All other data retrieved from `ExtractID` can be found in `ExtractInfo` with the latter having more details.
 
 Parsing the json obj is annoying. For example, if you would like to view the character desc of Rem:
-```ruby
+```python
 data = anilist.extractID.character("Rem")
 
 for i in range(len(data["data]["Page"]["characters']):
@@ -111,7 +111,7 @@ for i in range(len(data["data]["Page"]["characters']):
 However, worry not! I will be sure to push out more user-friendly functions like the ones I showed at first.
 
 In addition to that, pagination is taken cared of by the new API. By default you retrieve three results but this can be edited to your liking:
-```ruby
+```python
 extractID(term, page = 1, perpage = 3)
 ```
 
@@ -119,12 +119,12 @@ extractID(term, page = 1, perpage = 3)
 The bot support utilizes the features presented above with minor edits for better usability. Currently bot support functions only include anime and character search. Manga search is under development. The file has been completely tested and the test cases are supplied along with the module.
 
 Instance creation for bot functions:
-```ruby
+```python
 from AnilistPython.botSupport import botSupportClass
 anilist_bot = botSupportClass()
 ```
 Usage:
-```ruby
+```python
 # ANIME
 anilist_bot.getAnimeInfo("Demon Slayer")        # returns a dictionary with anime info (parsed)
 anilist_bot.getAnimeInfoWithID(105333)          # returns a dictionary with anime info (parsed) - with ID
