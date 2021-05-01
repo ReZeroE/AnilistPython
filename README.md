@@ -46,12 +46,12 @@ Please select the anime that you are searching for in number: <enter 1, 2, or 3>
 
 For retrieved dictionaries from the the step above by using `.getAnimeInfo()` or `.getCharacterInfo()`, the data has be parsed and reformatted into more readable and easily accessible json objects. The **keys** to the correspounding dictionaries are as follows:
 ```ruby
-#ANIME                 #CHARACTER
-- name_romaji          - first_name
-- name_english         - last_name
-- starting_time        - native_name 
-- ending_time          - desc 
-- cover_image          - image
+#ANIME DICTIONARY KEYS        #CHARACTER DICTIONARY KEYS
+- name_romaji                 - first_name
+- name_english                - last_name
+- starting_time               - native_name 
+- ending_time                 - desc 
+- cover_image                 - image
 - banner_image
 - airing_format
 - airing_status
@@ -69,6 +69,19 @@ One simple example would be:
 Tensura Nikki: Tensei Shitara Slime Datta Ken                 # Ta-Da!
 ```
 <br/>
+
+## Sample Program
+Feel free to copy-paste this into a .py file to test it out!
+```python
+from AnilistPython import Anilist
+anilist = Anilist()
+
+data = anilist.getAnimeInfo("Sakurasou")
+
+print("Anime Title (Romaji): {name_romaji}".format(**data))
+print("Starting Date: {starting_time}".format(**data))
+print("Ending Date: {ending_time}".format(**data))
+```
 
 ## Here are some more advanced usages:
 (Works for all anime, manga, characters, studio, and staff)
