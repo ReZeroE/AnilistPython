@@ -68,7 +68,6 @@ One simple example would be:
 >>> print(extracted_data["name_romaji"])                      # applies the key "name_romaji"
 Tensura Nikki: Tensei Shitara Slime Datta Ken                 # Ta-Da!
 ```
-<br/>
 
 ## Sample Program
 Feel free to copy-paste this into a .py file to test it out!
@@ -82,6 +81,7 @@ print("Anime Title (Romaji): {name_romaji}".format(**data))
 print("Starting Date: {starting_time}".format(**data))
 print("Ending Date: {ending_time}".format(**data))
 ```
+<br/>
 
 ## Here are some more advanced usages:
 (Works for all anime, manga, characters, studio, and staff)
