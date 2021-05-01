@@ -12,6 +12,8 @@ Currently, only anime and character data retrival has been optimized for beginne
  - Anime Genre Search (Not supported by the AniList API) - temporarily on-hold
  - Manga Search Bot support
 
+<br/>
+
 ## How to use?
 **Step One:** Library Installation
 ``` python
@@ -27,14 +29,14 @@ anilist = Anilist()
 Starting off, there are a set of commands optimized for auto json parsing. Currently, they are only available for anime and characters. All of the following functions uses Anilist's new GraphQL API.
 ```python
 # ANIME
-anilist.getAnimeInfo("Code Geass")          # returns a dictionary with anime info (parsed)
+anilist.getAnimeInfo("Code Geass")          # returns a dictionary with anime info 
 anilist.getAnimeID("ReZero")                # returns Re:Zero's ID on Anilist
 anilist.printAnimeInfo("Madoka Magica")     # prints all information regarding the anime Madoka Magica
 
 #CHARACTER
-anilist.getCharacterInfo("Emilia")          # returns a dictionary containing the info about Emilia-tan (parsed)
+anilist.getCharacterInfo("Emilia")          # returns a dictionary containing the info about Emilia-tan 
 anilist.getCharacterID("Milim")             # returns character Milim's ID on Anilist
-anilist.printCharacterInfo("Misaka Mikoto") # prints all information regarding the character Misaka Mikoto (desc not parsed)
+anilist.printCharacterInfo("Misaka Mikoto") # prints all information regarding the character Misaka Mikoto 
 ```
 Once the commands above are executed, the program will automatically search and retrieve the request information. When multiple targets are found, **three** results will be shown in the terminal. Pick your desired character to retrieve their information.
 ```ruby
@@ -68,6 +70,7 @@ One simple example would be:
 >>> print(extracted_data["name_romaji"])                      # applies the key "name_romaji"
 Tensura Nikki: Tensei Shitara Slime Datta Ken                 # Ta-Da!
 ```
+<br/>
 
 ## Sample Program
 Feel free to copy-paste this into a .py file to test it out!
@@ -127,6 +130,7 @@ In addition to that, pagination is taken cared of by the new API. By default you
 ```python
 extractID(term, page = 1, perpage = 3)
 ```
+<br/>
 
 ## Bot Support
 The bot support utilizes the features presented above with minor edits for better usability. Currently bot support functions only include anime and character search. Manga search is under development. The file has been completely tested and the test cases are supplied along with the module.
@@ -139,13 +143,13 @@ anilist_bot = botSupportClass()
 Usage:
 ```python
 # ANIME
-anilist_bot.getAnimeInfo("Demon Slayer")        # returns a dictionary with anime info (parsed)
-anilist_bot.getAnimeInfoWithID(105333)          # returns a dictionary with anime info (parsed) - with ID
+anilist_bot.getAnimeInfo("Demon Slayer")        # returns a dictionary with anime info 
+anilist_bot.getAnimeInfoWithID(105333)          # returns a dictionary with anime info - with ID
 anilist_bot.getAnimeID("Eighty-Six")            # returns Re:Zero's ID on Anilist
 
 #CHARACTER
-anilist_bot.getCharacterInfo("Emilia")          # returns a dictionary containing the info about Emilia-tan (parsed)
-anilist_bot.getCharacterInfoWithID(93284)       # returns a dictionary containing the info about a character with ID (parsed)
+anilist_bot.getCharacterInfo("Emilia")          # returns a dictionary containing the info about Emilia-tan 
+anilist_bot.getCharacterInfoWithID(93284)       # returns a dictionary containing the info about a character with ID 
 anilist_bot.getCharacterID("Milim")             # returns character Milim's ID on Anilist
 ```
 Note that bot support will return the result of the **first match** through searches. If no results are found, Nonetype will be returned for info requests and -1 will be returned for ID request. For more details regarding the functions, please read the in-file comments.
