@@ -1,5 +1,5 @@
 # AnilistPython
-Anilist Python library that allows you to **easily search up and retrieve anime, manga, animation studio, and character information.** This library is both beginner-friendly and offers the freedom for more experienced developers to interact with the retrieved information.
+AniList Python library that allows you to **easily search up and retrieve anime, manga, animation studio, and character information.** This library is both beginner-friendly and offers the freedom for more experienced developers to interact with the retrieved information.
 
 ## Overview
 This library is currently developed by a team of one and many operations in the library are yet to be optimized. However, the current version (0.1.0) has been tested and it is completely functional at its current state.  The code base drew a lot of inspiration from the PyMoe library which mainly offers data block retrieval with no auto json parsing. 
