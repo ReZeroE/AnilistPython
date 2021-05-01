@@ -73,16 +73,16 @@ Tensura Nikki: Tensei Shitara Slime Datta Ken                 # Ta-Da!
 <br/>
 
 ## Sample Program
-Feel free to copy-paste this into a .py file to test it out!
+Sample program that searches up "Sakurasou no Pet na Kanojo". Feel free to copy-paste this into a .py file to test it out!
 ```python
-from AnilistPython import Anilist
-anilist = Anilist()
+from AnilistPython import Anilist                             # import the AnilistPython module
+anilist = Anilist()                                           # instance creation
 
-data = anilist.getAnimeInfo("Sakurasou")
+data = anilist.getAnimeInfo("Sakurasou")                      # retrieves info on "Sakurasou"
 
-print("Anime Title (Romaji): {name_romaji}".format(**data))
-print("Starting Date: {starting_time}".format(**data))
-print("Ending Date: {ending_time}".format(**data))
+print("Anime Title (Romaji): {name_romaji}".format(**data))   # prints out the romaji name of the anime
+print("Starting Date: {starting_time}".format(**data))        # prints out the starting time of the anime
+print("Ending Date: {ending_time}".format(**data))            # prints out the ending time of the anime
 ```
 <br/>
 
