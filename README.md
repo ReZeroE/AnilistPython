@@ -40,6 +40,8 @@ anilist.printCharacterInfo("Misaka Mikoto") # prints all information regarding t
 ```
 Once the commands above are executed, the program will automatically search and retrieve the request information. When multiple targets are found, **three** results will be shown in the terminal. Pick your desired character to retrieve their information.
 ```ruby
+>> anilist.getCharacterInfo("Magica Madoka")
+
 1. Madonna (Movie)
 2. Mahou Shoujo Madoka☆Magica
 3. Hanoka
