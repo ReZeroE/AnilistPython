@@ -115,16 +115,17 @@ Parsing the json obj is annoying. For example, if you would like to view the cha
 ```python
 data = anilist.extractID.character("Rem")
 
-for i in range(len(data["data]["Page"]["characters']):
-  first_name = data["data"]["Page"]["characters"][i]['name']["first"]
-  last_name = data["data"]["Page"]["characters"][i]['name']["last"]
-  print(f"{first_name}, {last_name}")
-  
- user_input = int(input("Select the anime character that you are trying to find: "))
- <checks for corner cases>
- 
- info = anilist.extractInfo.character(data['data']['Page']["characters'][user_input - 1]["id"]
- print(info["data"]["Character"]["description"])
+for i in range(len(data["data"]["Page"]["characters"])):
+    first_name = data["data"]["Page"]["characters"][i]['name']["first"]
+    last_name = data["data"]["Page"]["characters"][i]['name']["last"]
+    print(f"{first_name}, {last_name}")
+
+    user_input = int(input("Select the anime character that you are trying to find: "))
+    
+    # <checks for corner cases>
+
+    info = anilist.extractInfo.character(data['data']['Page']['characters'][user_input - 1]['id'])
+    print(info["data"]["Character"]["description"])
 ```
 However, worry not! I will be sure to push out more user-friendly functions like the ones I showed at first.
 
