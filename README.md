@@ -8,9 +8,9 @@ Currently, only anime and character data retrival has been optimized for beginne
 
 **Ver 0.1.0 Update** - AniList bot support has been added!
 
-**Upcoming features planned for Ver 0.1.2 or later**
+**Upcoming features planned for Ver 0.1.1 or later**
  - Anime Genre Search (Not supported by the AniList API) - temporarily on-hold
- - Manga Search Bot support
+ - Manga Search Bot support (Planned for 0.1.1)
 
 <br/>
 
