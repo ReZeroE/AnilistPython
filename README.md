@@ -9,16 +9,12 @@ AniList Python library (anilist.co APIv2 wrapper) that allows you to **easily se
 
 ![alt text](https://i.imgur.com/uGzW7vr.jpg)
 
-## Overview
-This library is currently developed by a team of one and many operations in the library are yet to be optimized. However, the current version (0.1.0) has been tested and it is completely functional at its current state.  The code base drew a lot of inspiration from the PyMoe library which mainly offers data block retrieval with no auto json parsing. 
+## Upcoming Version 1.1 Overview
+This upcoming update for AnilistPython will result in a moderate change in the library's archetecture for increased efficiency and speed. Certain function names have been slightly altered and these changes will be documented properly once the new version is released. In addition to this, The new version will also include prebuilt anime databases to (1) alleviate AniList's APIv2 rate limit issue and (2) Inialize support for offline anime data retrieval
 
-Currently, only anime and character data retrival has been optimized for beginner-friendly data parsing. 
-
-**Ver 0.1.0 Update** - AniList bot support has been added!
-
-**Upcoming features planned for Ver 0.1.1 or later**
- - Anime Genre Search (Not supported by the AniList API) - temporarily on-hold
- - Manga Search Bot support (Planned for 0.1.1) - late
+Furthermore, the following new features will be included in the upcoming version:
+1. Manga and Anime Studio data retrieval support
+2. Anime search by genre (up to 3 genres at once) - BETA
 
 <br/>
 
