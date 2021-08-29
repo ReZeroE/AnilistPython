@@ -14,7 +14,7 @@ This upcoming update for AnilistPython will result in a moderate change in the l
 
 Furthermore, the following new features will be included in the upcoming version:
 1. Manga and Anime Studio data retrieval support
-2. Anime search by genre (up to 3 genres at once) - BETA
+2. Anime search by genres, seasons, and/or release years - BETA
 
 <br/>
 
