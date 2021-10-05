@@ -161,6 +161,6 @@ anilist_bot.getCharacterID("Milim")             # returns character Milim's ID o
 Note that bot support will return the result of the **first match** through searches. If no results are found, Nonetype will be returned for info requests and -1 will be returned for ID request. For more details regarding the functions, please read the in-file comments.
 
 ## Credits
-Lead Developer: Kevin L. (ReZeroK)
+Lead Developer: Kevin L. (ReZeroE)
 
 Special thanks to AniList's ApiV2 GraphQL Dev team for making this possible. 
