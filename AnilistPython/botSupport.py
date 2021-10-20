@@ -2,9 +2,11 @@
 File reserved for bot functions. Currently Under Development
 '''
 import time
+
 import requests
-from .extractInfo import ExtractInfo
+
 from .extractID import ExtractID
+from .extractInfo import ExtractInfo
 
 
 class botSupportClass:

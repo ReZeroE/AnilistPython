@@ -1,7 +1,9 @@
 from .botSupport import botSupportClass
+
 anilistBot = botSupportClass()
 
 from .__init__ import Anilist
+
 instance = Anilist()
 
 class TestCase:

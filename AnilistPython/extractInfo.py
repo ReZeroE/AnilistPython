@@ -1,6 +1,9 @@
 import json
+
 import requests
+
 from .QSFile import QSData
+
 qsObj = QSData()
 
 class ExtractInfo:
