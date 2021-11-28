@@ -16,6 +16,8 @@ Furthermore, the following new features will be included in the upcoming version
 1. Manga and Anime Studio data retrieval support
 2. Anime search by genres, seasons, and/or release years - BETA
 
+I am a full-time uni student so the development on this will be slow. I'will try to push out these new updates once every few months.  
+
 <br/>
 
 ## How to use?
