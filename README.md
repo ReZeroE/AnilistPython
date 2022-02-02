@@ -11,13 +11,22 @@ AniList Python library (anilist.co APIv2 wrapper) that allows you to **easily se
 ![alt text](https://i.imgur.com/uGzW7vr.jpg)
 
 ## Upcoming Version 1.1 Overview
-This upcoming update for AnilistPython will result in a moderate change in the library's archetecture for increased efficiency and speed. Certain function names have been slightly altered and these changes will be documented properly once the new version is released. In addition to this, The new version will also include prebuilt anime databases to (1) alleviate AniList's APIv2 rate limit issue and (2) Inialize support for offline anime data retrieval
 
-Furthermore, the following new features will be included in the upcoming version:
-1. Manga and Anime Studio data retrieval support
-2. Anime search by genres, seasons, and/or release years - BETA
+Version 0.1.1 has now been completed and has entered its testing phase. It should be released in a few days.
 
-I am a full-time uni student so the development on this will be slow. I'will try to push out these new updates once every few months.  
+The new version for AnilistPython will result in a moderate change in the library's archetecture for increased efficiency and speed. Various features has also been added to the library. Listed below are some of the main additions and alterations made to the library.
+
+**New features**:
+1. Anime search by genre, year, and/or average score (finally!)
+2. Offline anime retrieval support for anime - BETA
+3. Manga search support
+4. Auto setup feature that help new python programmers to setup required libraries automatically
+
+Optimization and updates:
+1. The lib now possess its own prebuild anime database! 
+2. Anime, manga, and character search functions have all been optimized, making searches faster!
+3. Improved the deepsearch feature in `.get_anime()`. 
+4. Manually selecting results feature is now a parameter instead of a seperate function (see usage below). 
 
 <br/>
 
