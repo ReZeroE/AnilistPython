@@ -1,0 +1,66 @@
+{
+    "placeholder": "placeholder",
+    "11757": {
+        "name_romaji": "Sword Art Online",
+        "name_english": "Sword Art Online",
+        "starting_time": "7/8/2012",
+        "ending_time": "12/23/2012",
+        "cover_image": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/nx11757-Q9P2zjCPICq5.jpg",
+        "banner_image": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/11757-TlEEV9weG4Ag.jpg",
+        "airing_format": "TV",
+        "airing_status": "FINISHED",
+        "airing_episodes": 25,
+        "season": "SUMMER",
+        "desc": "In the near future, a Virtual Reality Massive Multiplayer Online Role-Playing Game (VRMMORPG) called Sword Art Online has been released where players control their avatars with their bodies using a piece of technology called Nerve Gear. One day, players discover they cannot log out, as the game creator is holding them captive unless they reach the 100th floor of the game's tower and defeat the final boss. However, if they die in the game, they die in real life. Their struggle for survival starts now...<br><br>\n(Source: Crunchyroll)",
+        "average_score": 68,
+        "genres": [
+            "Action",
+            "Adventure",
+            "Fantasy",
+            "Romance"
+        ],
+        "next_airing_ep": null,
+        "cache_pos": 1
+    },
+    "20594": {
+        "name_romaji": "Sword Art Online II",
+        "name_english": "Sword Art Online II",
+        "starting_time": "7/5/2014",
+        "ending_time": "12/20/2014",
+        "cover_image": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/nx20594-FhRgZ1H9Istt.jpg",
+        "banner_image": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/20594-BZOLwqidcS1G.jpg",
+        "airing_format": "TV",
+        "airing_status": "FINISHED",
+        "airing_episodes": 24,
+        "season": "SUMMER",
+        "desc": "One year after the SAO incident, Kirito is approached by Seijiro Kikuoka from Japan's Ministry of Internal Affairs and Communications Department \"VR Division\" with a rather peculiar request.\r\n\r\nThat was an investigation on the \"Death Gun\" incident that occurred in the gun and steel filled VRMMO called Gun Gale Online (GGO). \"Players who are shot by a mysterious avatar with a jet black gun lose their lives even in the real world...\" Failing to turn down Kikuoka's bizarre request, Kirito logs in to GGO even though he is not completely convinced that the virtual world could physically affect the real world.<br>\r\n<br>\r\nKirito wanders in an unfamiliar world in order to gain any clues about the \"Death Gun.\" Then, a female sniper named Sinon who owns a gigantic \"Hecate II\" rifle extends Kirito a helping hand. With Sinon's help, Kirito decides to enter the \"Bullet of Bullets,\" a large tournament to choose the most powerful gunner within the realm of GGO, in hopes to become the target of the \"Death Gun\" and make direct contact with the mysterious avatar.<br>\r\n<br>\r\n(Source: Crunchyroll)",
+        "average_score": 65,
+        "genres": [
+            "Action",
+            "Adventure",
+            "Fantasy",
+            "Sci-Fi"
+        ],
+        "next_airing_ep": null,
+        "cache_pos": 2
+    },
+    "16099": {
+        "name_romaji": "Sword Art Offline",
+        "name_english": "Sword Art OFFline",
+        "starting_time": "10/24/2012",
+        "ending_time": "6/26/2013",
+        "cover_image": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/16099.jpg",
+        "banner_image": null,
+        "airing_format": "SPECIAL",
+        "airing_status": "FINISHED",
+        "airing_episodes": 9,
+        "season": "FALL",
+        "desc": "BD/DVD specials.",
+        "average_score": 54,
+        "genres": [
+            "Comedy"
+        ],
+        "next_airing_ep": null,
+        "cache_pos": 3
+    }
+}
