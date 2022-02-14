@@ -40,7 +40,7 @@ anilist = Anilist()
 
 The AnilistPython library has been split into three distinct sections. Each section possess a different set of functions used for retrieving data in that category. Please visit the full documentation for more info or skip to the General Function Overview section for usage.
 - **Anime** - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Anime))
-- - **Manga** - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Manga))
+- **Manga** - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Manga))
 - **Character** - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Character))
 
 
