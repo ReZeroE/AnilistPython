@@ -6,7 +6,7 @@
 ![licence](https://img.shields.io/github/license/ReZeroE/AnilistPython)
 ![Test](https://pepy.tech/badge/anilistpython)
 
-AniList Python library (unofficial anilist.co APIv2 wrapper) that allows you to **easily search up and retrieve anime, manga, animation studio, and character information.** This library is both beginner-friendly and offers the freedom for more experienced developers to interact with the retrieved information. Provides bot support.
+AniList Python library (anilist.co APIv2 wrapper) that allows you to **easily search up and retrieve anime, manga, animation studio, and character information.** This library is both beginner-friendly and offers the freedom for more experienced developers to interact with the retrieved information. Provides bot support.
 
 ![alt text](https://i.imgur.com/uGzW7vr.jpg)
 
