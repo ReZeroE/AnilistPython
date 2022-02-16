@@ -81,6 +81,8 @@ AnilistPython was originially designed to support various Discord Bot features i
 
 Upcoming AnilistPython Version 0.1.2 will provide functions to generate pre-formated Discord embeds (Anime, Manga, Character embeds) as well as other features that make AnilistPython bot implementations easy to use. 
 
+Sample anime discord bot supported by AnilistPython V0.1.1: [Anime C.C. Discord Bot](https://github.com/ReZeroE/Anime-Discord-Bot)
+
 Note: Please make sure that parameter `manual_select` has not been set to True in bot implementations. (False by default)
 
 ## Credits
