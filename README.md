@@ -10,7 +10,7 @@ AniList Python library (anilist.co APIv2 wrapper) that allows you to **easily se
 
 ![alt text](https://i.imgur.com/uGzW7vr.jpg)
 
-## Version 0.1.1 Overview
+## Version 0.1.3 Overview
 This recent update for AnilistPython has resulted in a moderate change in the library's archetecture for increased efficiency and speed. Various features have also been added to the library. Listed below are some of the main additions and alterations made to the library.
 
 **New features**:
@@ -29,7 +29,7 @@ Optimization and updates:
 ## How to use?
 **Step One:** Library Installation
 ``` python
-pip install AnilistPython==0.1.1
+pip install AnilistPython==0.1.3
 ```
 **Step Two:** Instance Creation
 ```python
@@ -45,7 +45,7 @@ The AnilistPython library has been split into three distinct sections. Each sect
 
 
 ## General Function Overview
-The following functions are supported by AnilistPyhon version 0.1.1. Only the default parameter has been displayed below. For more information, visit the [full documentation](https://github.com/ReZeroE/AnilistPython/wiki). 
+The following functions are supported by AnilistPyhon version 0.1.3. Only the default parameter has been displayed below. For more information, visit the [full documentation](https://github.com/ReZeroE/AnilistPython/wiki). 
 ```python
 # ANIME
 anilist.get_anime("Owari no Seraph")        # returns a dictionary containing info about owari no seraph
@@ -79,9 +79,9 @@ anilist.get_anime("Owari no Seraph", manual_select=True)
 ## Discord Bot Support
 AnilistPython was originially designed to support various Discord Bot features in relation to anime, but through out the course of its development, more features became available to use by the general programs other than Discord bots. With that been said, the current version of AnilistPython has further optimized its functions for bot support. From the pre-formatted JSON file upon data retrieval to offline database support (see full documentation), it is now able to be implemented in bots with ease. 
 
-Upcoming AnilistPython Version 0.1.2 will provide functions to generate pre-formated Discord embeds (Anime, Manga, Character embeds) as well as other features that make AnilistPython bot implementations easy to use. 
+Upcoming AnilistPython Version 0.2.0 will provide functions to generate pre-formated Discord embeds (Anime, Manga, Character embeds) as well as other features that make AnilistPython bot implementations easy to use. 
 
-Sample anime discord bot supported by AnilistPython V0.1.1: [Anime C.C. Discord Bot](https://github.com/ReZeroE/Anime-Discord-Bot)
+Sample anime discord bot supported by AnilistPython V0.1.3: [Anime C.C. Discord Bot](https://github.com/ReZeroE/Anime-Discord-Bot)
 
 Note: Please make sure that parameter `manual_select` has not been set to True in bot implementations. (False by default)
 
