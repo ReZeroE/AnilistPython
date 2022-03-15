@@ -17,7 +17,7 @@ This recent update for AnilistPython has resulted in a moderate change in the li
 1. Anime search by genre, year, and/or average score (finally!)
 2. Offline anime retrieval support for anime - BETA
 3. Manga search support
-4. Auto setup feature that help new python programmers to setup required libraries automatically
+4. Auto setup feature that assist new python programmers to setup the required libraries automatically (auto pre-req lib checking)
 
 Optimization and updates:
 1. The lib now has its own prebuild anime database! 
