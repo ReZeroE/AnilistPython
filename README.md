@@ -38,7 +38,7 @@ anilist = Anilist()
 ```
 **Step Three**: Usage
 
-The AnilistPython library has been split into three distinct sections. Each section has a different set of functions used for retrieving data in that category. Please visit the full documentation for more info or skip to the General Function Overview section for usage.
+The AnilistPython library has been split into three distinct sections. Each section has a different set of functions used for retrieving data in that category. Please visit the full documentation for more info or skip to the **General Function Overview** section below for usage.
 - **Anime** - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Anime))
 - **Manga** - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Manga))
 - **Character** - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Character))
@@ -88,4 +88,4 @@ Note: Please make sure that parameter `manual_select` has not been set to True i
 ## Credits
 Lead Developer: Kevin L. (ReZeroE)
 
-Special thanks to AniList's ApiV2 GraphQL Dev team for making this possible. 
+Special thanks to the AniList's ApiV2 GraphQL Dev team for making this possible. 
