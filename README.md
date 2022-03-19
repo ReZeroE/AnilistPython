@@ -77,7 +77,7 @@ anilist.get_anime("Owari no Seraph", manual_select=True)
 
 
 ## Discord Bot Support
-AnilistPython was originially designed to support various Discord Bot features in relation to anime, but through out the course of its development, more features became available to use by the general programs other than Discord bots. With that been said, the current version of AnilistPython has further optimized its functions for bot support. From the pre-formatted JSON file upon data retrieval to offline database support (see full documentation), it is now able to be implemented in bots with ease. 
+AnilistPython was originially designed to support various Discord Bot features in relation to anime, but throughout the course of its development, more features became available for a wide range of applications other than Discord bots. With that been said, the current version of AnilistPython has further optimized its functions for bot support. From the pre-formatted JSON file upon data retrieval to offline database support (see full documentation), it is now able to be implemented in bots with ease. 
 
 Upcoming AnilistPython Version 0.2.0 will provide functions to generate pre-formated Discord embeds (Anime, Manga, Character embeds) as well as other features that make AnilistPython bot implementations easy to use. 
 
