@@ -1,4 +1,3 @@
-from msilib.schema import Error
 import sys
 import os
 import json
@@ -23,7 +22,7 @@ class Setup:
         try:
             with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'setup.json'), 'r', encoding="utf-8") as rf:
                 d = json.load(rf)
-        except Error as e:
+        except Exception as e:
             pass
             # print('Setup file error.')
 
