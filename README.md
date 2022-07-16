@@ -85,7 +85,7 @@ Sample anime discord bot supported by AnilistPython V0.1.3: [Anime C.C. Discord 
 
 Note: Please make sure that parameter `manual_select` has not been set to True in bot implementations. (False by default)
 
-## Upcoming Version 0.1.4 (Release delayed)
+## Upcoming Version 0.1.4 (Release delayed to the end of July)
 The upcoming version 0.1.4 of the AnilistPython lib will include the following features and fixes.
 - SQLite3 database support
 - Partial Discord bot embed support 
