@@ -43,8 +43,6 @@ The AnilistPython library has been split into three distinct sections. Each sect
 - **Manga** - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Manga))
 - **Character** - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Character))
 
-If an error occurs, please refer the to the [Error Fixes](https://github.com/ReZeroE/AnilistPython/edit/main/README.md#troubleshooting) section.
-
 ## General Function Overview
 The following functions are supported by AnilistPyhon version 0.1.3. Only the default parameter has been displayed below. For more information, visit the [full documentation](https://github.com/ReZeroE/AnilistPython/wiki). 
 ```python
@@ -76,6 +74,7 @@ Note: The feature for manully selecting the top three search results in the term
 anilist.get_anime("Owari no Seraph", manual_select=True)
 ```
 
+If an error occurs while running AnilistPython, please refer the to the [Error Fixes](https://github.com/ReZeroE/AnilistPython/edit/main/README.md#troubleshooting) section.
 
 ## Discord Bot Support
 AnilistPython was originially designed to support various Discord Bot features in relation to anime, but throughout the course of its development, more features became available for a wide range of applications other than Discord bots. With that been said, the current version of AnilistPython has further optimized its functions for bot support. From the pre-formatted JSON file upon data retrieval to offline database support (see full documentation), it is now able to be implemented in bots with ease. 
