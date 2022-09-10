@@ -43,6 +43,7 @@ The AnilistPython library has been split into three distinct sections. Each sect
 - **Manga** - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Manga))
 - **Character** - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Character))
 
+If an error occurs, please refer the to the [Error Fixes](https://github.com/ReZeroE/AnilistPython/edit/main/README.md#troubleshooting) section.
 
 ## General Function Overview
 The following functions are supported by AnilistPyhon version 0.1.3. Only the default parameter has been displayed below. For more information, visit the [full documentation](https://github.com/ReZeroE/AnilistPython/wiki). 
@@ -101,6 +102,12 @@ The upcoming version 0.1.4 of the AnilistPython lib will include the following f
     - siteUrl
  - Beta Discord embed support
 
+## Error Fixes
+1. `ModuleNotFoundError` for `requests`
+   - This error has been reported and will be fixed in the upcoming version.
+   - To fix the error, run `pip install requests` or `pip3 install requests` 
+
+If you issue is not present here, feel free to [open a new issue](https://github.com/ReZeroE/AnilistPython/issues) for help!
 
 ## Credits
 Lead Developer: Kevin L. (ReZeroE)
