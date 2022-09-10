@@ -74,7 +74,7 @@ Note: The feature for manully selecting the top three search results in the term
 anilist.get_anime("Owari no Seraph", manual_select=True)
 ```
 
-If an error occurs while running AnilistPython, please refer the to the [Error Fixes](https://github.com/ReZeroE/AnilistPython/edit/main/README.md#troubleshooting) section.
+If an error occurs while running AnilistPython, please refer the to the [Error Fixes](https://github.com/ReZeroE/AnilistPython#error-fixes) section.
 
 ## Discord Bot Support
 AnilistPython was originially designed to support various Discord Bot features in relation to anime, but throughout the course of its development, more features became available for a wide range of applications other than Discord bots. With that been said, the current version of AnilistPython has further optimized its functions for bot support. From the pre-formatted JSON file upon data retrieval to offline database support (see full documentation), it is now able to be implemented in bots with ease. 
