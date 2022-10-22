@@ -1,9 +1,31 @@
+# MIT License
+#
+# Copyright (c) 2021 Kevin L.
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+
 import os
-import datetime
 import json
 import requests
-from query_strings import QSData
-qsObj = QSData()
+
+from constants import *
 
 class ExtractInfo:
     def __init__(self, access, status):
@@ -11,6 +33,7 @@ class ExtractInfo:
         self.status = status # Boolean value used for bots
 
         self.logfile = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'error-log.txt')
+
 
     def anime(self, anime_id):
         """
@@ -28,19 +51,18 @@ class ExtractInfo:
         id_val = {"id": anime_id}
         req = requests.post(self.access['apiurl'],
                          headers=self.access['header'],
-                         json={'query': qsObj.animeInfoQS, 'variables': id_val})
+                         json={'query': ANIME_INFO_QUERY, 'variables': id_val})
         
         if req.status_code != 200:
             raise Exception(f"Data post unsuccessful. ({req.status_code})")
 
         try:
             extracted_data = json.loads(req.text)
-        except ValueError:
-            return None
-        except TypeError:
+        except ValueError or TypeError:
             return None
         else:
             return extracted_data
+
 
     def manga(self, manga_id):
         """
@@ -58,19 +80,18 @@ class ExtractInfo:
         id_val = {"id": manga_id}
         req = requests.post(self.access['apiurl'],
                          headers=self.access['header'],
-                         json={'query': qsObj.mangaInfoQS, 'variables': id_val})
+                         json={'query': MANGA_INFO_QUERY, 'variables': id_val})
         
         if req.status_code != 200:
             raise Exception(f"Data post unsuccessful. ({req.status_code})")
 
         try:
             extracted_data = json.loads(req.text)
-        except ValueError:
-            return None
-        except TypeError:
+        except ValueError or TypeError:
             return None
         else:
             return extracted_data
+
 
     def staff(self, staff_id):
         """
@@ -88,19 +109,18 @@ class ExtractInfo:
         id_val = {"id": staff_id}
         req = requests.post(self.access['apiurl'],
                          headers=self.access['header'],
-                         json={'query': qsObj.staffInfoQS, 'variables': id_val})
+                         json={'query': STAFF_INFO_QUERY, 'variables': id_val})
         
         if req.status_code != 200:
             raise Exception(f"Data post unsuccessful. ({req.status_code})")
 
         try:
             extracted_data = json.loads(req.text)
-        except ValueError:
-            return None
-        except TypeError:
+        except ValueError or TypeError:
             return None
         else:
             return extracted_data
+
 
     def studio(self, studio_id):
         """
@@ -118,19 +138,18 @@ class ExtractInfo:
         id_val = {"id": studio_id}
         req = requests.post(self.access['apiurl'],
                          headers=self.access['header'],
-                         json={'query': qsObj.studioInfoQS, 'variables': id_val})
+                         json={'query': STUDIO_INFO_QUERY, 'variables': id_val})
         
         if req.status_code != 200:
             raise Exception(f"Data post unsuccessful. ({req.status_code})")
 
         try:
             extracted_data = json.loads(req.text)
-        except ValueError:
-            return None
-        except TypeError:
+        except ValueError or TypeError:
             return None
         else:
             return extracted_data
+
 
     def character(self, character_id):
         """
@@ -148,19 +167,18 @@ class ExtractInfo:
         id_val = {"id": character_id}
         req = requests.post(self.access['apiurl'],
                          headers=self.access['header'],
-                         json={'query': qsObj.characterInfoQS, 'variables': id_val})
+                         json={'query': CHARACTER_INFO_QUERY, 'variables': id_val})
         
         if req.status_code != 200:
             raise Exception(f"Data post unsuccessful. ({req.status_code})")
 
         try:
             extracted_data = json.loads(req.text)
-        except ValueError:
-            return None
-        except TypeError:
+        except ValueError or TypeError:
             return None
         else:
             return extracted_data
+
 
     def review(self, review_id, html):
         """
@@ -176,13 +194,11 @@ class ExtractInfo:
         id_val = {"id": review_id, "html": html}
         req = requests.post(self.access['apiurl'],
                           headers=self.access['header'],
-                          json={'query': qsObj.reviewInfoQS, 'variables': id_val})
+                          json={'query': REVIEW_INFO_QUERY, 'variables': id_val})
 
         try:
             extracted_data = json.loads(req.text)
-        except ValueError:
-            return None
-        except TypeError:
+        except ValueError or TypeError:
             return None
         else:
             return extracted_data
