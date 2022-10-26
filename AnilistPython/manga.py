@@ -21,10 +21,13 @@
 # SOFTWARE.
 
 
-import time
-import requests
+import datetime
+from termcolor import colored
+from tabulate import tabulate
+
 from retrieve_data import ExtractInfo
 from retrieve_id import ExtractID
+from anilist_exceptions import MangaNotFoundError
 
 class Manga:
     def __init__(self, access_info, activated=True):
@@ -32,7 +35,7 @@ class Manga:
         self.extractID = ExtractID(access_info, activated)
 
 
-    def getManga(self, manga_name, manual_select=False):
+    def getManga(self, manga_name, count, manual_select=False):
         '''
         Retrieve character info in the form of a json object.
         Retrieve json object will be reformatted in a easily accessable json obj.
@@ -41,47 +44,61 @@ class Manga:
         :return: parsed dict containing the character's data
         :rtype: dict
         '''
-        manga_dict = {}
+        results = []
 
-        manga_id = self.getMangaID(manga_name, manual_select)
-        if manga_id == -1:
-            return None
+        manga_ids = self.getMangaIDs(manga_name, count, manual_select)
+        if len(manga_ids) == 0: return results
 
-        data = self.extractInfo.manga(manga_id)
-        media_lvl = data['data']['Media']
-        
-        manga_dict['name_romaji'] = media_lvl['title']['romaji']
-        manga_dict['name_english'] = media_lvl['title']['english']
+        for manga_id in manga_ids:
 
-        start_year = media_lvl['startDate']['year']
-        start_month = media_lvl['startDate']['month']
-        start_day = media_lvl['startDate']['day']
+            data = self.extractInfo.manga(manga_id)
+            media = data['data']['Media']
+            
+            name_romaji     = media['title']['romaji']
+            name_english    = media['title']['english']
 
-        end_year = media_lvl['endDate']['year']
-        end_month = media_lvl['endDate']['month']
-        end_day = media_lvl['endDate']['day']
+            start_year      = media['startDate']['year']
+            start_month     = media['startDate']['month']
+            start_day       = media['startDate']['day']
+            end_year        = media['endDate']['year']
+            end_month       = media['endDate']['month']
+            end_day         = media['endDate']['day']
 
-        manga_dict['starting_time'] = f'{start_month}/{start_day}/{start_year}'
-        manga_dict['ending_time'] = f'{end_month}/{end_day}/{end_year}'
+            starting_time = f'{start_month}/{start_day}/{start_year}'
+            ending_time = f'{end_month}/{end_day}/{end_year}'
 
-        manga_dict['cover_image'] = media_lvl['coverImage']['large']
-        manga_dict['banner_image'] = media_lvl['bannerImage']
+            cover_image     = media['coverImage']['large']
+            banner_image    = media['bannerImage']
+            release_format  = media['format']
+            release_status  = media['status']
+            chapters        = media['chapters']
+            volumes         = media['volumes']
+            desc            = media['description']
+            average_score   = media['averageScore']
+            mean_score      = media['meanScore']
+            genres          = media['genres']
+            synonyms        = media['synonyms']
 
-        manga_dict['release_format'] = media_lvl['format']
-        manga_dict['release_status'] = media_lvl['status']
+            manga_dict = {
+                "name_romaji": name_romaji,
+                "name_english": name_english,
+                "starting_time": starting_time,
+                "ending_time": ending_time,
+                "cover_image": cover_image,
+                "banner_image": banner_image,
+                "release_format": release_format,
+                "release_status": release_status,
+                "chapters": chapters,
+                "volumes": volumes,
+                "desc": desc,
+                "average_score": average_score,
+                "mean_score": mean_score,
+                "genres": genres,
+                "synonyms": synonyms
+            }
+            results.append(manga_dict)
 
-        manga_dict['chapters'] = media_lvl['chapters']
-        manga_dict['volumes'] = media_lvl['volumes']
-
-        manga_dict['desc'] = media_lvl['description']
-
-        manga_dict['average_score'] = media_lvl['averageScore']
-        manga_dict['mean_score'] = media_lvl['meanScore']
-
-        manga_dict['genres'] = media_lvl['genres']
-        manga_dict['synonyms'] = media_lvl['synonyms']
-
-        return manga_dict
+        return results
 
 
     def getMangaWithID(self, manga_id) -> dict:
@@ -93,46 +110,56 @@ class Manga:
         :return: parsed dict containing the character's data
         :rtype: dict
         '''
-        manga_dict = {}
 
         data = self.extractInfo.manga(manga_id)
-        media_lvl = data['data']['Media']
+        media = data['data']['Media']
         
-        manga_dict['name_romaji'] = media_lvl['title']['romaji']
-        manga_dict['name_english'] = media_lvl['title']['english']
+        name_romaji     = media['title']['romaji']
+        name_english    = media['title']['english']
 
-        start_year = media_lvl['startDate']['year']
-        start_month = media_lvl['startDate']['month']
-        start_day = media_lvl['startDate']['day']
+        start_year      = media['startDate']['year']
+        start_month     = media['startDate']['month']
+        start_day       = media['startDate']['day']
+        end_year        = media['endDate']['year']
+        end_month       = media['endDate']['month']
+        end_day         = media['endDate']['day']
 
-        end_year = media_lvl['endDate']['year']
-        end_month = media_lvl['endDate']['month']
-        end_day = media_lvl['endDate']['day']
+        starting_time = f'{start_month}/{start_day}/{start_year}'
+        ending_time = f'{end_month}/{end_day}/{end_year}'
 
-        manga_dict['starting_time'] = f'{start_month}/{start_day}/{start_year}'
-        manga_dict['ending_time'] = f'{end_month}/{end_day}/{end_year}'
+        cover_image     = media['coverImage']['large']
+        banner_image    = media['bannerImage']
+        release_format  = media['format']
+        release_status  = media['status']
+        chapters        = media['chapters']
+        volumes         = media['volumes']
+        desc            = media['description']
+        average_score   = media['averageScore']
+        mean_score      = media['meanScore']
+        genres          = media['genres']
+        synonyms        = media['synonyms']
 
-        manga_dict['cover_image'] = media_lvl['coverImage']['large']
-        manga_dict['banner_image'] = media_lvl['bannerImage']
-
-        manga_dict['release_format'] = media_lvl['format']
-        manga_dict['release_status'] = media_lvl['status']
-
-        manga_dict['chapters'] = media_lvl['chapters']
-        manga_dict['volumes'] = media_lvl['volumes']
-
-        manga_dict['desc'] = media_lvl['description']
-
-        manga_dict['average_score'] = media_lvl['averageScore']
-        manga_dict['mean_score'] = media_lvl['meanScore']
-
-        manga_dict['genres'] = media_lvl['genres']
-        manga_dict['synonyms'] = media_lvl['synonyms']
+        manga_dict = {
+            "name_romaji": name_romaji,
+            "name_english": name_english,
+            "starting_time": starting_time,
+            "ending_time": ending_time,
+            "cover_image": cover_image,
+            "banner_image": banner_image,
+            "release_format": release_format,
+            "release_status": release_status,
+            "chapters": chapters,
+            "volumes": volumes,
+            "desc": desc,
+            "average_score": average_score,
+            "mean_score": mean_score,
+            "genres": genres,
+            "synonyms": synonyms
+        }
 
         return manga_dict
 
-
-    def getMangaID(self, manga_name, manual_select=False):
+    def getMangaIDs(self, manga_name, count, manual_select=False):
         '''
         Retrieves the character ID on Anilist.
 
@@ -141,28 +168,28 @@ class Manga:
         :rtype: int
         '''
 
+        # ===================================
+        # ====== | Manual Select OFF | ======
+        # ===================================
         if manual_select == False:
-            manga_list = []
-            data = self.extractID.manga(manga_name)
-            for i in range(len(data['data']['Page']['media'])):
-                curr_manga = data['data']['Page']['media'][i]['title']['romaji']
-                manga_list.append(curr_manga)
-
-            print(manga_list)
-
-            # returns the first manga found
+            manga_ids= []
+            data = self.extractID.manga(manga_name, perpage=count)
             try:
-                manga_ID = data['data']['Page']['media'][0]['id']
+                for media in data['data']['Page']['media']:
+                    manga_ids.append(media['title']['romaji'])
             except IndexError:
-                raise IndexError('Manga Not Found')
+                raise MangaNotFoundError(manga_name)
 
-            return manga_ID
+            return manga_ids
 
 
+        # ===================================
+        # ====== | Manual Select ON | =======
+        # ===================================
         elif manual_select == True:
             max_result = 0
             counter = 0 # number of displayed results from search
-            data = self.extractID.manga(manga_name)
+            data = self.extractID.manga(manga_name, perpage=count)
             for i in range(len(data['data']['Page']['media'])):
                 curr_manga = data['data']['Page']['media'][i]['title']['romaji']
                 print(f"{counter + 1}. {curr_manga}")
@@ -174,25 +201,19 @@ class Manga:
                     user_input = int(input("Please select the manga that you are searching for in number: "))
                 except TypeError or ValueError:
                     print(f"Your input is incorrect! Please try again!")
-                    return -1
-
+                    exit(0)
                 if user_input > max_result or user_input <= 0:
                     print("Your input does not correspound to any of the manga displayed!")
-                    return -1
+                    exit(0)
             elif counter == 0:
                 print(f'No search result has been found for the manga "{manga_name}"!')
-                return -1
+                exit(0)
             else:
                 user_input = 1
 
             return data['data']['Page']['media'][user_input - 1]['id']
-        
-        else:
-            # placeholder
-            pass
 
-
-    def displayMangaInfo(self, manga_name, manual_select=False):
+    def displayMangaInfo(self, manga_name, manual_select=False, title_colored=True):
         '''
         Displays all character data.
         Auto formats the displayed version of the data.
@@ -200,18 +221,20 @@ class Manga:
         :param character_name: The character of the Manga
         '''
 
-        manga_dict = self.getManga(manga_name, manual_select)
-        if manga_dict == None:
-            print("Manga Search Error - Manga Not Found")
-        else:
-            arr = ['name_romaji', 'name_english', 'starting_time', 'ending_time', 'cover_image', 'banner_image', \
-                    'release_format', 'release_status', 'chapters', 'volumes', 'desc', 'average_score', 'mean_score', \
-                    'genres', 'synonyms']
-            counter = 0
+        manga_dicts = self.getManga(manga_name, manual_select)
+        if len(manga_dicts) == 0:
+            raise MangaNotFoundError(manga_name)
+        
+        data_list = []
+        for manga_dict in manga_dicts:
+            for k, v in manga_dict.items():
+                if k == 'name_romaji' or k == 'name_english' and title_colored:
+                    v = colored(v, "cyan")
+                if len(str(v)) > 100:
+                    v = "<...> (run .get_anime() for full view)"
+                elif v == None:
+                    v = "N/A"
+                data_list.append([k, v])
 
-            print('\n')
-            print("========================================================================")
-            print("============================== MANGA INFO ==============================")
-            for key, value in manga_dict.items():
-                print(f"{arr[counter]}: {value}")
-                counter += 1
+            print(tabulate(data_list, tablefmt="fancy_outline"))
+            data_list.clear()
