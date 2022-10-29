@@ -82,8 +82,8 @@ class AniDatabaseRetriever:
     def bulk_insert(self, records: list):
         # self.db_conn.execute("DROP TABLE Anime_Records")
 
-        curr_time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-        print(f"[{curr_time}] Writing {self.BULK_WRITE_THRESHOLD} records into DB...")
+        # curr_time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+        # print(f"[{curr_time}] Writing {self.BULK_WRITE_THRESHOLD} records into DB...")
         try:
             self.db_conn.executemany("INSERT INTO Anime_Records VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", records)
         except sqlite3.ProgrammingError as ex:   # 1. incorrect number of fields supplied
@@ -98,7 +98,7 @@ class AniDatabaseRetriever:
         self.db_conn.commit()
 
     def initialize_values(self):
-        db_ret.create_database()
+        self.create_database()
 
         curr_record_id = 0
         prev_record = self.db_conn.execute("SELECT * FROM Anime_Records ORDER BY id DESC LIMIT 1").fetchall()
@@ -149,20 +149,18 @@ class AniDatabaseRetriever:
         return "%d hr, %02d min, %02d secs" % (h, m, s)
 
 
-    def run_update():
-        db_ret = AniDatabaseRetriever()
-
+    def run_update(self):
         start = time.time()
 
         curr_time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
         header = f"\n\n=============================== [{curr_time}] ==============================="
         print(header)
         print(f"""
-        Retriever Version: {db_ret.RETRIEVER_VERSION}
-        Internal Support: AnilistPython V{db_ret.ANILISTPYTHON_VERSION}
-        Ratelimit Offset: {db_ret.RATELIMIT_OFFSET} secs
-        SQL Bulk Writes Threshold: {db_ret.BULK_WRITE_THRESHOLD} records
-        Estimated Time Consumption: {db_ret.convert_time(db_ret.MAX_ANIME_ID * (db_ret.RATELIMIT_OFFSET + 0.14) - db_ret.initialize_values())} 
+        Retriever Version: {self.RETRIEVER_VERSION}
+        Internal Support: AnilistPython V{self.ANILISTPYTHON_VERSION}
+        Ratelimit Offset: {self.RATELIMIT_OFFSET} secs
+        SQL Bulk Writes Threshold: {self.BULK_WRITE_THRESHOLD} records
+        Estimated Time Consumption: {self.convert_time(self.MAX_ANIME_ID * (self.RATELIMIT_OFFSET + 0.14) - self.initialize_values())} 
         """)
         l = ['='] * (len(header) - 2)
         print("".join(l) + "\n\n")
@@ -170,42 +168,16 @@ class AniDatabaseRetriever:
         u_i = input("Continue? [y/n]")
         if u_i.lower() != "y": exit(0)
 
-        db_ret.create_database()
+        self.create_database()
 
         s = time.time()
-        db_ret.retrieve_anime_data()
+        self.retrieve_anime_data()
         print(f"avg: {((time.time() - s) / 3000)}")
 
         print("All records have been successfully retrieved... Program Terminating...")
-        print(f"Time Consumption: [{db_ret.convert_time(time.time() - start)}]")
+        print(f"Time Consumption: [{self.convert_time(time.time() - start)}]")
 
 
 if __name__ == "__main__":
     db_ret = AniDatabaseRetriever()
-
-    start = time.time()
-
-    curr_time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-    header = f"\n\n=============================== [{curr_time}] ==============================="
-    print(header)
-    print(f"""
-    Retriever Version: {db_ret.RETRIEVER_VERSION}
-    Internal Support: AnilistPython V{db_ret.ANILISTPYTHON_VERSION}
-    Ratelimit Offset: {db_ret.RATELIMIT_OFFSET} secs
-    SQL Bulk Writes Threshold: {db_ret.BULK_WRITE_THRESHOLD} records
-    Estimated Time Consumption: {db_ret.convert_time(db_ret.MAX_ANIME_ID * (db_ret.RATELIMIT_OFFSET + 0.14) - db_ret.initialize_values())} 
-    """)
-    l = ['='] * (len(header) - 2)
-    print("".join(l) + "\n\n")
-    
-    u_i = input("Continue? [y/n]")
-    if u_i.lower() != "y": exit(0)
-
-    db_ret.create_database()
-
-    s = time.time()
-    db_ret.retrieve_anime_data()
-    print(f"avg: {((time.time() - s) / 3000)}")
-
-    print("All records have been successfully retrieved... Program Terminating...")
-    print(f"Time Consumption: [{db_ret.convert_time(time.time() - start)}]")
+    db_ret.run_update()
