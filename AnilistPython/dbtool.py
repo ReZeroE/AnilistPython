@@ -30,8 +30,9 @@ from datetime import datetime
 
 from __init__ import Anilist, __version__
 
+## NOTE: retrieved database goes into the tmp directory!
 DB_NAME = "anime_database.sqlite3"
-DB_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), os.path.join("databases", DB_NAME))
+DB_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), os.path.join("tmp", DB_NAME))
 
 
 class AniDatabaseRetriever:
@@ -40,7 +41,7 @@ class AniDatabaseRetriever:
 
         self.MAX_ANIME_ID = 300000
         self.BULK_WRITE_THRESHOLD = 1
-        self.RETRIEVER_VERSION = 'V2.1-SQLite3'
+        self.RETRIEVER_VERSION = 'V2.2-SQLite3'
         self.RATELIMIT_OFFSET = 0.75
         self.ANILISTPYTHON_VERSION = __version__
 
@@ -149,7 +150,7 @@ class AniDatabaseRetriever:
         return "%d hr, %02d min, %02d secs" % (h, m, s)
 
 
-    def run_update(self):
+    def run_retriever(self):
         start = time.time()
 
         curr_time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
@@ -160,7 +161,7 @@ class AniDatabaseRetriever:
         Internal Support: AnilistPython V{self.ANILISTPYTHON_VERSION}
         Ratelimit Offset: {self.RATELIMIT_OFFSET} secs
         SQL Bulk Writes Threshold: {self.BULK_WRITE_THRESHOLD} records
-        Estimated Time Consumption: {self.convert_time(self.MAX_ANIME_ID * (self.RATELIMIT_OFFSET + 0.14) - self.initialize_values())} 
+        Estimated Time Consumption: {self.convert_time((self.MAX_ANIME_ID - self.initialize_values()) * (self.RATELIMIT_OFFSET + 0.14))} [{self.MAX_ANIME_ID - self.initialize_values()} records]
         """)
         l = ['='] * (len(header) - 2)
         print("".join(l) + "\n\n")
@@ -180,4 +181,4 @@ class AniDatabaseRetriever:
 
 if __name__ == "__main__":
     db_ret = AniDatabaseRetriever()
-    db_ret.run_update()
+    db_ret.run_retriever()
