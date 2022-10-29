@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 
-import datetime
+
 from termcolor import colored
 from tabulate import tabulate
 

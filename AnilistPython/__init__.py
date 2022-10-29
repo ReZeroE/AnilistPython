@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 
-__version__     = "1.0.0"
+__version__     = "0.1.4"
 __author__      = "Kevin L."
 __name__        = "AnilistPython"
 __license__     = "MIT License"
@@ -66,6 +66,7 @@ class Anilist:
         self.anime = Anime(self.access, activated)
         self.character = Character(self.access, activated)
         self.manga = Manga(self.access, activated)
+        self.version = __version__
 
     def help(self):
         '''
@@ -73,6 +74,11 @@ class Anilist:
         '''
         print("\nFor the full documentation, please visit <https://github.com/ReZeroE/AnilistPython>.", file=sys.stdout)
         sys.stdout.flush()
+
+    def update_db(self):
+        from dbtool import AniDatabaseRetriever
+        a = AniDatabaseRetriever()
+        a.run_update()
 
     # ANIME =====================================================================================================================
     def get_anime_id(self, anime_name, count=1, manual_select=False) -> list:
@@ -180,7 +186,7 @@ class Anilist:
         :return: The character's ID on Anilist. Returns -1 if an error is caught.
         :rtype: int
         '''
-        return self.character.getCharacterID(character_name, manual_select)
+        return self.character.getCharacterIDs(character_name, manual_select)
 
     def get_character(self, character_name, count=3, manual_select=False) -> dict:
         '''

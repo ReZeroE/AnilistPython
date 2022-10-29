@@ -13,4 +13,5 @@ import json
 # print(json.dumps(d, indent=4))
 
 # print(a.get_anime_id("Code Geass", count=20))
-a.print_manga_info("tearoom empire", count=5, manual_select=True)
+# a.print_manga_info("tearoom empire", count=5, manual_select=True)
+a.update_db()
