@@ -36,8 +36,8 @@ from anime import Anime
 from character import Character
 from manga import Manga
 from utils.deepsearch.deep_search import DeepSearch
-from databases.database_anime_retrieval import DatabaseSearcher
-from databases.search_engine import SearchEngine
+
+from databases.db_update.update_db import DatabaseUpdateTool
 
 class Anilist:
     """
@@ -76,9 +76,8 @@ class Anilist:
         sys.stdout.flush()
 
     def update_db(self):
-        from dbtool import AniDatabaseRetriever
-        a = AniDatabaseRetriever()
-        a.run_update()
+        db_update_tool = DatabaseUpdateTool()
+        db_update_tool.update_db()
 
     # ANIME =====================================================================================================================
     def get_anime_id(self, anime_name, count=1, manual_select=False) -> list:
