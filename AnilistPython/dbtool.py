@@ -21,6 +21,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+# How to run?
+# This script runs standalone independent of the AnilistPython modules.
+#
+# To start retrieving a new database:
+# $ python3 ./dbtool.py
+# 
+# If the run is stopped half-way, the program will auto detect the previous record
+# retrieved and continue the run from there.
 
 import sys
 import os
