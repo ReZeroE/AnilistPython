@@ -176,7 +176,7 @@ class Manga:
             data = self.extractID.manga(manga_name, perpage=count)
             try:
                 for media in data['data']['Page']['media']:
-                    manga_ids.append(media['title']['romaji'])
+                    manga_ids.append(media['id'])
             except IndexError:
                 raise MangaNotFoundError(manga_name)
 
@@ -211,9 +211,9 @@ class Manga:
             else:
                 user_input = 1
 
-            return data['data']['Page']['media'][user_input - 1]['id']
+            return [data['data']['Page']['media'][user_input - 1]['id']]
 
-    def displayMangaInfo(self, manga_name, manual_select=False, title_colored=True):
+    def displayMangaInfo(self, manga_name, count, manual_select, title_colored):
         '''
         Displays all character data.
         Auto formats the displayed version of the data.
@@ -221,7 +221,7 @@ class Manga:
         :param character_name: The character of the Manga
         '''
 
-        manga_dicts = self.getManga(manga_name, manual_select)
+        manga_dicts = self.getManga(manga_name, count, manual_select)
         if len(manga_dicts) == 0:
             raise MangaNotFoundError(manga_name)
         
@@ -232,6 +232,8 @@ class Manga:
                     v = colored(v, "cyan")
                 if len(str(v)) > 100:
                     v = "<...> (run .get_anime() for full view)"
+                if k == 'genres' or k == "synonyms":
+                    v = ", ".join(v)
                 elif v == None:
                     v = "N/A"
                 data_list.append([k, v])

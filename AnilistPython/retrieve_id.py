@@ -102,7 +102,6 @@ class ExtractID:
         :return: A list of perpage num elements containing the dictionaries of each Manga or None.
         :rtype: dict list or None
         """
-
         preset = {"query": term, "page": page, "perpage": perpage}
         req = requests.post(self.access['apiurl'],
                           headers=self.access['header'],

@@ -148,7 +148,7 @@ class Anilist:
 
         return self.anime.getAnimeWithID(anime_id)
         
-    def print_anime_info(self, anime_name, count=3, title_colored=True):
+    def print_anime_info(self, anime_name, count=3, manual_select=False, title_colored=True):
         '''
         Displays all anime data.
         Auto formats the displayed version of the data.
@@ -156,7 +156,7 @@ class Anilist:
         :param anime_name: The name of the anime
         '''
 
-        self.anime.displayAnimeInfo(anime_name, count, title_colored)
+        self.anime.displayAnimeInfo(anime_name, count, manual_select, title_colored)
 
     def search_anime(self, genre=None, year=None, score=None, id_only=False) -> list:
         '''
@@ -253,7 +253,7 @@ class Anilist:
         '''
         return self.manga.getMangaWithID(manga_id)
 
-    def print_manga_info(self, manga_name, manual_select=False):
+    def print_manga_info(self, manga_name, count=1, manual_select=False, title_colored=True):
         '''
         Displays all manga data.
         Auto formats the displayed version of the data.
@@ -262,4 +262,4 @@ class Anilist:
         :manual_select: prompts the user the top three results to select in the terminal
         '''
 
-        self.manga.displayMangaInfo(manga_name, manual_select)
+        self.manga.displayMangaInfo(manga_name, count, manual_select, title_colored)

@@ -39,7 +39,7 @@ from datetime import datetime
 from __init__ import Anilist, __version__
 
 ## NOTE: retrieved database goes into the tmp directory!
-DB_NAME = "anime_database.sqlite3"
+DB_NAME = "anime_database_tmp.sqlite3"
 DB_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), os.path.join("tmp", DB_NAME))
 
 

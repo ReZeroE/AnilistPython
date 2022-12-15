@@ -14,9 +14,32 @@ import json
 
 # print(a.get_anime_id("Code Geass", count=20))
 # a.print_manga_info("tearoom empire", count=5, manual_select=True)
+# a.update_db()
+
+# a.print_manga_info("86", manual_select=True, count=5)
+
+
+# access = {'header': {'Content-Type': 'application/json',
+#                             'User-Agent': 'AnilistPython (github.com/ReZeroE/AnilistPython)',
+#                             'Accept': 'application/json'},
+#                     'authurl': 'https://anilist.co/api',
+#                     'apiurl': 'https://graphql.anilist.co',
+#                     'cid': None,
+#                     'csecret': None,
+#                     'token': None}
+
 a.update_db()
 
+# from retrieve_id import ExtractID
+# e = ExtractID(access=access, status=True)
 
+# print(e.manga("tearmoon"))
+
+
+# from retrieve_data import ExtractInfo
+# d = ExtractInfo(access, True)
+
+# print(d.manga(112830))
 
 # from github import Github
 # g = Github()

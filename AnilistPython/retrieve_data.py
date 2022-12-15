@@ -73,7 +73,6 @@ class ExtractInfo:
         :return: dict or None
         :rtype: dict or NoneType
         """
-
         if self.status == False:
             raise Exception("Current function status is False.")
 

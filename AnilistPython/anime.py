@@ -256,6 +256,8 @@ class Anime:
                         pass
                 elif k == "duration":
                     v = f"{v} minutes"
+                if k == "genres":
+                    v = ", ".join(v)
                 data_list.append([k, v])
 
             print(tabulate(data_list, tablefmt="fancy_outline"))
