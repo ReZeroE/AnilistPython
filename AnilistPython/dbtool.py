@@ -99,12 +99,12 @@ class AniDatabaseRetriever:
         self.db_conn.commit()
 
     def bulk_insert(self, records: list):
-        # self.db_conn.execute("DROP TABLE Anime_Records")
+        # self.db_conn.execute("DROP TABLE Anime")
 
         # curr_time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
         # print(f"[{curr_time}] Writing {self.BULK_WRITE_THRESHOLD} records into DB...")
         try:
-            self.db_conn.executemany("INSERT INTO Anime_Records VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", records)
+            self.db_conn.executemany("INSERT INTO Anime VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", records)
         except sqlite3.ProgrammingError as ex:   # 1. incorrect number of fields supplied
             raise(ex)
         except sqlite3.IntegrityError as ex:     # 2. type mismatch / duplicate primary key
@@ -120,13 +120,13 @@ class AniDatabaseRetriever:
         self.create_database()
 
         curr_record_id = 0
-        prev_record = self.db_conn.execute("SELECT * FROM Anime_Records ORDER BY id DESC LIMIT 1").fetchall()
+        prev_record = self.db_conn.execute("SELECT * FROM Anime ORDER BY id DESC LIMIT 1").fetchall()
         if len(prev_record) > 0: curr_record_id = prev_record[0][0] + 1
         return curr_record_id
 
     def retrieve_anime_data(self):
         curr_record_id = 0
-        prev_record = self.db_conn.execute("SELECT * FROM Anime_Records ORDER BY id DESC LIMIT 1").fetchall()
+        prev_record = self.db_conn.execute("SELECT * FROM Anime ORDER BY id DESC LIMIT 1").fetchall()
         if len(prev_record) > 0: curr_record_id = prev_record[0][0] + 1
 
         anime_records = []
