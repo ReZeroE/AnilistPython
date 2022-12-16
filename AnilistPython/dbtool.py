@@ -97,10 +97,10 @@ class AniDatabaseRetriever:
         """)
 
         cur.execute("SELECT count(*) FROM Metadata")
-        ct = cur.fetchall()[0]
+        ct = cur.fetchall()[0][0]
         if ct == 0:
             cur.execute("INSERT INTO Metadata DEFAULT VALUES;")
-            
+
         self.db_conn.commit()
 
     def bulk_insert(self, records: list):
