@@ -36,6 +36,7 @@ import sqlite3
 import time
 from datetime import datetime
 
+import __init__
 from __init__ import Anilist, __version__
 
 ## NOTE: retrieved database goes into the tmp directory!
@@ -82,7 +83,7 @@ class AniDatabaseRetriever:
                 updated_at      TEXT,
                 source          TEXT,
                 url             TEXT,
-                
+
                 record_updated_on DATETIME NOT NULL
             );
         """)
@@ -91,7 +92,7 @@ class AniDatabaseRetriever:
             CREATE TABLE IF NOT EXISTS Metadata (
                 database_updated_on         DATETIME NOT NULL DEFAULT current_timestamp,
                 retriever_version           TEXT DEFAULT NOT NULL '{self.RETRIEVER_VERSION}',
-                anilistpython_version       TEXT DEFAULT NOT NULL '{self.anilist.__version__}'
+                anilistpython_version       TEXT DEFAULT NOT NULL '{__init__.__version__}'
             )
         """)
         self.db_conn.commit()
