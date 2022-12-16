@@ -60,7 +60,7 @@ class AniDatabaseRetriever:
     def create_database(self):
         cur = self.db_conn.cursor()
         cur.execute("""
-            CREATE TABLE IF NOT EXISTS Anime_Records (
+            CREATE TABLE IF NOT EXISTS Anime (
                 id              INTEGER PRIMARY KEY,
                 name_romaji     TEXT,
                 name_english    TEXT,
@@ -95,6 +95,7 @@ class AniDatabaseRetriever:
                 anilistpython_version       TEXT NOT NULL DEFAULT '{__init__.__version__}'
             )
         """)
+        cur.execute("INSERT INTO Metadata DEFAULT VALUES;")
         self.db_conn.commit()
 
     def bulk_insert(self, records: list):
