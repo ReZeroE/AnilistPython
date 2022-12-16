@@ -91,8 +91,8 @@ class AniDatabaseRetriever:
         cur.execute(f"""
             CREATE TABLE IF NOT EXISTS Metadata (
                 database_updated_on         DATETIME NOT NULL DEFAULT current_timestamp,
-                retriever_version           TEXT DEFAULT NOT NULL '{self.RETRIEVER_VERSION}',
-                anilistpython_version       TEXT DEFAULT NOT NULL '{__init__.__version__}'
+                retriever_version           TEXT NOT NULL DEFAULT '{self.RETRIEVER_VERSION}',
+                anilistpython_version       TEXT NOT NULL DEFAULT '{__init__.__version__}'
             )
         """)
         self.db_conn.commit()
