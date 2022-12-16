@@ -48,6 +48,7 @@ class AnilistPythonInternalError(Exception):
         self.message = message
         super().__init__(self.message)
 
+
 class AnilistPythonDSError(Exception):
     __module__ = 'builtins'
     def __init__(self, message="AnilistPython Deep Search Error Has Occurred. Try setting deep_search in .get_anime() to False."):

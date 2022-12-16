@@ -28,7 +28,7 @@ import json
 #                     'csecret': None,
 #                     'token': None}
 
-a.update_db()
+print(a.get_anime_with_id(21765))
 
 # from retrieve_id import ExtractID
 # e = ExtractID(access=access, status=True)
