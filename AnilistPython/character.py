@@ -178,5 +178,8 @@ class Character:
                     v = "N/A"
                 data.append([k, v])
         
-            print(tabulate(data, tablefmt="fancy_outline"))
+            try:
+                print(tabulate(data, tablefmt="fancy_outline"))
+            except:
+                print(tabulate(data))
             data.clear()

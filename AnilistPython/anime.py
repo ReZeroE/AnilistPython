@@ -260,5 +260,8 @@ class Anime:
                     v = ", ".join(v)
                 data_list.append([k, v])
 
-            print(tabulate(data_list, tablefmt="fancy_outline"))
+            try:
+                print(tabulate(data_list, tablefmt="fancy_outline"))
+            except:
+                print(tabulate(data_list))
             data_list.clear()

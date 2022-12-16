@@ -82,10 +82,17 @@ class AniDatabaseRetriever:
                 updated_at      TEXT,
                 source          TEXT,
                 url             TEXT,
-
-                x_record_updated_at DATETIME,
-                x_retriever_version
+                
+                record_updated_on DATETIME NOT NULL
             );
+        """)
+
+        cur.execute(f"""
+            CREATE TABLE IF NOT EXISTS Metadata (
+                database_updated_on         DATETIME NOT NULL DEFAULT current_timestamp,
+                retriever_version           TEXT DEFAULT NOT NULL '{self.RETRIEVER_VERSION}',
+                anilistpython_version       TEXT DEFAULT NOT NULL '{self.anilist.__version__}'
+            )
         """)
         self.db_conn.commit()
 
@@ -95,7 +102,7 @@ class AniDatabaseRetriever:
         # curr_time = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
         # print(f"[{curr_time}] Writing {self.BULK_WRITE_THRESHOLD} records into DB...")
         try:
-            self.db_conn.executemany("INSERT INTO Anime_Records VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", records)
+            self.db_conn.executemany("INSERT INTO Anime_Records VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", records)
         except sqlite3.ProgrammingError as ex:   # 1. incorrect number of fields supplied
             raise(ex)
         except sqlite3.IntegrityError as ex:     # 2. type mismatch / duplicate primary key
@@ -138,7 +145,6 @@ class AniDatabaseRetriever:
                         content = "|".join([str(time) for time in content.values()])
                     anime_tuple += (content,)
                 anime_tuple += (datetime.now().strftime("%m-%d-%Y %H:%M:%S"),)
-                anime_tuple += (self.RETRIEVER_VERSION,)
                 anime_records.append(anime_tuple)
 
                 anime_name = anime_data["name_romaji"]
