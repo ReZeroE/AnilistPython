@@ -1,6 +1,7 @@
 # AnilistPython
 
 ![example workflow](https://github.com/ReZeroE/AnilistPython/actions/workflows/github-actions-demo.yml/badge.svg)
+![downloads](https://img.shields.io/github/workflow/status/ReZeroE/AnilistPython/GitHub%20Actions%20Demo)
 ![downloads](https://img.shields.io/pypi/dm/AnilistPython)
 ![licence](https://img.shields.io/github/license/ReZeroE/AnilistPython)
 ![Test](https://pepy.tech/badge/anilistpython)
@@ -84,16 +85,11 @@ Sample anime discord bot supported by AnilistPython V0.1.3: [Anime C.C. Discord 
 
 Note: Please make sure that parameter `manual_select` has not been set to True in bot implementations. (False by default)
 
-## Upcoming Version 0.1.4 (Releasing before 1/1/2023)
+## Upcoming Version 0.1.4 (Release delayed)
 The upcoming version 0.1.4 of the AnilistPython lib will include the following features and fixes.
 - SQLite3 database support
-  - Provides functions to update the local database
-  - Updated and optimized local DB search functions, reducing the search time by >95%.
-  - New categories for DB search
 - Partial Discord bot embed support 
-- Fixes to known errors
-  - Missing requirements in requirements.txt
-  - Failed auto setup module
+- Minor auto lib setup error fix
 - New data fields for `.get_anime()`:
     - isAdult
     - popularity
@@ -103,6 +99,7 @@ The upcoming version 0.1.4 of the AnilistPython lib will include the following f
     - updatedAt
     - source
     - siteUrl
+ - Beta Discord embed support
 
 ## Error Fixes
 1. `ModuleNotFoundError` for `requests`
