@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # MIT License
 #
 # Copyright (c) 2021 Kevin L.
@@ -73,20 +74,6 @@ ANIME_DICT_KEYS = [
     "source",
     "url"
 ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ## Anilist APIv2 GraphQL Query Strings 

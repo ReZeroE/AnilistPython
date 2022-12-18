@@ -28,7 +28,14 @@ import json
 #                     'csecret': None,
 #                     'token': None}
 
-print(a.get_anime_with_id(21765))
+# print(a.get_anime_with_id(21765))
+
+
+from __init__ import AnimeDatabase
+a = AnimeDatabase()
+
+print(a.update_db())
+
 
 # from retrieve_id import ExtractID
 # e = ExtractID(access=access, status=True)

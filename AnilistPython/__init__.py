@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # MIT License
 #
 # Copyright (c) 2021 Kevin L.
@@ -25,20 +26,31 @@ __version__     = "0.1.4"
 __author__      = "Kevin L."
 __name__        = "AnilistPython"
 __license__     = "MIT License"
-__autoformat__  = False
+
+auto_format     = False
 
 
 import sys
 import time
 import requests
 
-from anime import Anime
-from character import Character
-from manga import Manga
+# Supported Anilist Submodules
+from anime      import Anime
+from character  import Character
+from manga      import Manga
+
+# Database Submodules
+from databases.db_update.update_db          import DatabaseUpdateTool
+from databases.db_search.anime_db_handler   import AnimeDatabaseHandler
+from databases.db_search.anime_db_handler   import AnimeGenres
+
+# Utilities
 from utils.deepsearch.deep_search import DeepSearch
 
-from databases.db_update.update_db import DatabaseUpdateTool
 
+# ================================
+# ==========| ANILIST |===========
+# ================================
 class Anilist:
     """
     Initialize a new instance to the Anilist driver API.
@@ -74,10 +86,6 @@ class Anilist:
         '''
         print("\nFor the full documentation, please visit <https://github.com/ReZeroE/AnilistPython>.", file=sys.stdout)
         sys.stdout.flush()
-
-    def update_db(self):
-        db_update_tool = DatabaseUpdateTool()
-        db_update_tool.update_db()
 
     # ANIME =====================================================================================================================
     def get_anime_id(self, anime_name, count=1, manual_select=False) -> list:
@@ -126,18 +134,6 @@ class Anilist:
             else:
                 return self.anime.getAnime(anime_name, count, manual_select)
 
-    def get_anime_from_database(self, anime_name) -> list:
-        '''
-        Retrieve the anime info in the form of a dictionary (from the local database).
-
-        :param anime_name: the name of the anime
-        :param deepsearch: deepsearch control value. False by default.
-        :return: a list of dictionaries containing all the search results.
-        :rtype: list
-        '''
-        se = SearchEngine()
-        return se.search_anime_database(anime_name)
-
     def get_anime_with_id(self, anime_id) -> dict:
         '''
         Retrieve anime info in the form of a dictionary using the anime's ID.
@@ -158,22 +154,6 @@ class Anilist:
 
         self.anime.displayAnimeInfo(anime_name, count, manual_select, title_colored)
 
-    def search_anime(self, genre=None, year=None, score=None, id_only=False) -> list:
-        '''
-        Searches anime with genre, season, and/or year. Returns a list of anime within the given restrictions.
-        Auto formats the displayed version of the data. (Accesses local database only)
-
-        :param retrieve_count: Max number of anime records to be retrieved. Retrieve all (-1) by default.
-        :param genre: The genre of the anime in str or list of str (i.e. 'Action' or ['Action', 'Romance'])
-        :param year: The year of the anime in str or list of str (i.e. '2012' or ['2012', '2013'])
-        :param score: The score of the anime in str as in range (i.e. '50' or '50-60' or range(50, 60))
-        :param id_only: Only retrieve the ID of the anime. False by default.
-
-        :return: a list of parsed dict containing the anime's data
-        :rtype: list
-        '''
-        database_searcher = DatabaseSearcher()
-        return database_searcher.anime_mix_search(genre=genre, year=year, score=score, id_only=id_only)
 
     # CHARACTER =================================================================================================================
     def get_character_id(self, character_name, count=1, manual_select=False) -> int:
@@ -217,6 +197,7 @@ class Anilist:
         :manual_select: prompts the user the top three results to select in the terminal
         '''
         self.character.displayCharacterInfo(character_name, count, manual_select, name_colored)
+
 
     # Manga =====================================================================================================================
     def get_manga_id(self, manga_name, count=3, manual_select=False) -> int:
@@ -263,3 +244,105 @@ class Anilist:
         '''
 
         self.manga.displayMangaInfo(manga_name, count, manual_select, title_colored)
+
+
+# =======================================
+# ==========| ANIME DATABASE |===========
+# =======================================
+class AnimeDatabase:
+    """
+    Anime database handler class. 
+    Provides a variety of anime database search and utility functions.
+    """
+    def __init__(self):
+        self.curr_db_ver = 0
+        self.database_handler = AnimeDatabaseHandler()
+
+    def update_db(self, verbose=True):
+        """
+        Update the local database to the newest version. Requires an internet connection.
+
+        :param verbose: Verbose progress. Default to True.
+        """
+        if verbose == True:
+            print(f"[AnilistPython {__version__}] Updating local database...", end=' ')
+            sys.stdout.flush()
+
+        db_update_tool = DatabaseUpdateTool()
+        db_update_tool.update_db()
+        time.sleep(1)
+
+        if verbose == True:
+            print("DONE")
+            sys.stdout.flush()
+
+    def search_by_id(self, anime_id) -> list:
+        """
+        Search local Anime database by the anime's ID.
+
+        :param anime_id: The anime's ID to search
+
+        :return: The anime's data
+        :rtype: dict
+        """
+        return self.database_handler.search_anime_db_by_id(anime_id)
+
+    def search_by_name(self, anime_name, id_only=False, case_sensitive=True, match_threshold=None) -> list:
+        """
+        Search anime by name from the local database.
+
+        :param anime_name: The name of the anime to search.
+        :param id_only: Return only the IDs of the anime found. Default to False.
+        :param case_sensitive: Search case sensitivity. Default to True.
+        :param match_threshold: The match threshold ratio for the search. Ranges between 0-100. Default to 80.
+
+        :return: A list of anime with matching names.
+        :rtype: list
+        """
+        return self.database_handler.search_anime_db_by_name(anime_name, id_only, case_sensitive, match_threshold)
+
+    def search_by_release_year(self, release_year, id_only=False) -> list:
+        """
+        Search anime by release year from the local database.
+
+        :param release_year: The release date of the anime. This value can be a range. (i.e. 2018 or range(2017, 2022))
+        :param id_only: Return only the IDs of the anime found. Default to False.
+
+        :return: A list of anime with the given release year.
+        :rtype: list
+        """
+        return self.database_handler.search_anime_db_by_release_year(release_year, id_only)
+
+    def search_by_season(self, release_season, id_only=False) -> list:
+        """
+        Search anime by release season from the local database.
+
+        :param release_season: The release season of the anime. ('Spring', 'Summer', 'Fall', or 'Winter')
+        :param id_only: Return only the IDs of the anime found. Default to False.
+
+        :return: A list of anime released in the given season.
+        :rtype: list
+        """
+        return self.database_handler.search_anime_db_by_release_season(release_season, id_only)
+
+    def search_by_genre(self, genre, id_only=False) -> list:
+        """
+        Search anime by genre(s) from the local database.
+
+        :param genre: The genre(s) of the anime. Can be either a list of a str. (i.e. 'action' or ['mahou shoujo', 'drama'])
+        :param id_only: Return only the IDs of the anime found. Default to False.
+        
+        :return: A list of anime with the target genre(s).
+        :rtype: list
+        """
+        return self.database_handler.search_anime_db_by_genre(genre, id_only)
+
+    def get_genres_list(self):
+        """
+        Returns a list of all the searchable genres.
+        """
+        return self.database_handler.get_genre_list()
+
+    
+
+    

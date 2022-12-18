@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # MIT License
 #
 # Copyright (c) 2021 Kevin L.

@@ -1,4 +1,4 @@
-
+# SPDX-License-Identifier: MIT
 # MIT License
 #
 # Copyright (c) 2021 Kevin L.
@@ -21,15 +21,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# How to run?
-# This script runs standalone independent of the AnilistPython modules.
-#
-# To start retrieving a new database:
-# $ python3 ./dbtool.py
-# 
-# If the run is stopped half-way, the program will auto detect the previous record
-# retrieved and continue the run from there.
-
 import sys
 import os
 import sqlite3
@@ -48,9 +39,10 @@ class AniDatabaseRetriever:
     def __init__(self):
         self.anilist = Anilist()
 
+        self.DATABASE_VERSION = 'v1.0'
         self.MAX_ANIME_ID = 300000
         self.BULK_WRITE_THRESHOLD = 1
-        self.RETRIEVER_VERSION = 'V2.2-SQLite3'
+        self.RETRIEVER_VERSION = 'v2.3-SQLite3'
         self.RATELIMIT_OFFSET = 0.75
         self.ANILISTPYTHON_VERSION = __version__
 
@@ -59,6 +51,8 @@ class AniDatabaseRetriever:
 
     def create_database(self):
         cur = self.db_conn.cursor()
+
+        # NOTE: The order of these fields cannot be rearranged!!
         cur.execute("""
             CREATE TABLE IF NOT EXISTS Anime (
                 id              INTEGER PRIMARY KEY,
@@ -90,6 +84,7 @@ class AniDatabaseRetriever:
 
         cur.execute(f"""
             CREATE TABLE IF NOT EXISTS Metadata (
+                database_version            TEXT NOT NULL DEFAULT '{self.DATABASE_VERSION}',
                 database_updated_on         DATETIME NOT NULL DEFAULT current_timestamp,
                 retriever_version           TEXT NOT NULL DEFAULT '{self.RETRIEVER_VERSION}',
                 anilistpython_version       TEXT NOT NULL DEFAULT '{__init__.__version__}'
