@@ -75,10 +75,10 @@ class Anilist:
                          'csecret': csecret,
                          'token': credentials}
 
-        self.anime = Anime(self.access, activated)
-        self.character = Character(self.access, activated)
-        self.manga = Manga(self.access, activated)
-        self.version = __version__
+        self.anime      = Anime(self.access, activated)
+        self.character  = Character(self.access, activated)
+        self.manga      = Manga(self.access, activated)
+        self.version    = __version__
 
     def help(self):
         '''
@@ -97,7 +97,7 @@ class Anilist:
         :return: The anime's ID on Anilist. Returns -1 if an error is caught.
         :rtype: int
         '''      
-        if __autoformat__:
+        if auto_format:
             id_list = self.anime.getAnimeID(anime_name, count, manual_select)
             if len(id_list) == 1: return id_list[0]
         else:
@@ -118,7 +118,7 @@ class Anilist:
         # ===============================
         if deepsearch == True:
             ds = DeepSearch()
-            if __autoformat__:
+            if auto_format:
                 ani_data = self.anime.getAnime(ds.deep_search_name_conversion(anime_name), count, manual_select)
                 if len(ani_data) == 1: return ani_data[0]
             else:
@@ -128,7 +128,7 @@ class Anilist:
         # ====== | Normal Search | ======
         # ===============================
         else:
-            if __autoformat__:
+            if auto_format:
                 ani_data = self.anime.getAnime(anime_name, count, manual_select)
                 if len(ani_data) == 1: return ani_data[0]
             else:
