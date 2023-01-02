@@ -4,4 +4,4 @@ __pycache__/
 *$py.class
 
 # Ignore Manual Testing Files
-*.z_manual_tests.py
+*z_manual_tests.py

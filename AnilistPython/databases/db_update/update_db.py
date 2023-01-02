@@ -33,7 +33,7 @@ class DatabaseUpdateTool():
         DATABASE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "databases")
         urllib.request.urlretrieve(
             ## DOWNLOAD FROM:
-            "https://github.com/ReZeroE/AnilistPython/blob/dev/AnilistPython/tmp/anime_database.sqlite3?raw=true", 
+            "https://github.com/ReZeroE/AnilistPython/blob/dev/AnilistPython/tmp/anime_database_tmp.sqlite3?raw=true", 
             
             ## TO DIRECTORY:
             os.path.join(DATABASE_DIR, "anime_database.sqlite3")
