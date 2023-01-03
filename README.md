@@ -149,6 +149,14 @@ anime_db.search_by_genre(['mahou shoujo', 'drama'], id_only=True)
 anime_db.search_by_season("spring")
 anime_db.search_by_season("spring", id_only=True)
 ```
+
+#### - Utility: Update DB
+```python
+# Download the newest DB from Github
+anime_db.update_db()
+anime_db.update_db(verbose=False)
+```
+
 ***
 
 ## Sample Programs
