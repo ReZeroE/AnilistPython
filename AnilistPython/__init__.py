@@ -40,8 +40,8 @@ from character  import Character
 from manga      import Manga
 
 # Database Submodules
-from databases.db_update.update_db          import DatabaseUpdateTool
-from databases.db_search.anime_db_handler   import AnimeDatabaseHandler
+from databases.db_update.update_db          import _DatabaseUpdateTool
+from databases.db_search.anime_db_handler   import _AnimeDatabaseHandler
 from databases.db_search.anime_db_handler   import AnimeGenres
 
 # Utilities
@@ -246,21 +246,23 @@ class Anilist:
         self.manga.displayMangaInfo(manga_name, count, manual_select, title_colored)
 
 
+
 # =======================================
 # ==========| ANIME DATABASE |===========
 # =======================================
-class AnimeDatabase:
+class AnimeDB:
     """
     Anime database handler class. 
     Provides a variety of anime database search and utility functions.
     """
-    def __init__(self):
+    def __init__(self, auto_update=True):
         self.curr_db_ver = 0
-        self.database_handler = AnimeDatabaseHandler()
+        self.database_handler   = _AnimeDatabaseHandler()
+        self.db_update_tool     = _DatabaseUpdateTool(auto_update)
 
     def update_db(self, verbose=True):
         """
-        Update the local database to the newest version. Requires an internet connection.
+        Update the local database to the newest version. Requires a stable internet connection.
 
         :param verbose: Verbose progress. Default to True.
         """
@@ -268,8 +270,7 @@ class AnimeDatabase:
             print(f"[AnilistPython {__version__}] Updating local database...", end=' ')
             sys.stdout.flush()
 
-        db_update_tool = DatabaseUpdateTool()
-        db_update_tool.update_db()
+        self.db_update_tool.update_db()
         time.sleep(1)
 
         if verbose == True:
@@ -287,13 +288,13 @@ class AnimeDatabase:
         """
         return self.database_handler.search_anime_db_by_id(anime_id)
 
-    def search_by_name(self, anime_name, id_only=False, case_sensitive=True, match_threshold=None) -> list:
+    def search_by_name(self, anime_name, id_only=False, case_sensitive=False, match_threshold=None) -> list:
         """
         Search anime by name from the local database.
 
         :param anime_name: The name of the anime to search.
         :param id_only: Return only the IDs of the anime found. Default to False.
-        :param case_sensitive: Search case sensitivity. Default to True.
+        :param case_sensitive: Search case sensitivity. Default to False.
         :param match_threshold: The match threshold ratio for the search. Ranges between 0-100. Default to 80.
 
         :return: A list of anime with matching names.

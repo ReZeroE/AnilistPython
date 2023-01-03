@@ -27,7 +27,7 @@ import rapidfuzz
 import sqlite3
 from copy import deepcopy
 
-class AnimeDatabaseHandler:
+class _AnimeDatabaseHandler:
     """
     Anime Database Handler Class. Provides DB search functions.
 
@@ -47,14 +47,12 @@ class AnimeDatabaseHandler:
         self.database_content = dict()
         self.database_columns = []
 
-
     def __get_conn(self):
         '''
         Establish connection to the target SQLite DB.
         :return: SQLite Connection
         '''
         return sqlite3.connect(self.db)
-
 
     def search_anime_db_by_id(self, anime_id) -> dict:
         """
@@ -78,7 +76,7 @@ class AnimeDatabaseHandler:
         cur = self.__get_conn().cursor()
 
         if len(self.database_content) == 0:
-            sql = f"SELECT * FROM Anime_Records"
+            sql = f"SELECT * FROM Anime"
             anime_db_data = cur.execute(sql)
 
             database_buffer = dict()
@@ -104,14 +102,13 @@ class AnimeDatabaseHandler:
 
         return None
 
-
-    def search_anime_db_by_name(self, anime_name, id_only=False, case_sensitive=True, match_threshold=None) -> list:
+    def search_anime_db_by_name(self, anime_name, id_only=False, case_sensitive=False, match_threshold=None) -> list:
         """
         Search anime by name from the local database!
 
         :param anime_name: The name of the anime to search.
         :param id_only: Return only the IDs of the anime found. Default to False.
-        :param case_sensitive: Search case sensitivity. Default to True.
+        :param case_sensitive: Search case sensitivity. Default to False.
         :param match_threshold: The match threshold ratio for the search. Ranges between 0-100. Default to 80.
         :return: A list of anime with matching names.
         :rtype: list
@@ -140,7 +137,7 @@ class AnimeDatabaseHandler:
         cur = self.__get_conn().cursor()
 
         if len(self.database_content) == 0:
-            sql = f"SELECT * FROM Anime_Records"
+            sql = f"SELECT * FROM Anime"
             anime_db_data = cur.execute(sql)
             db_columns = [c[0] for c in anime_db_data.description]
 
@@ -165,7 +162,7 @@ class AnimeDatabaseHandler:
             name_romaji     = anime_data[1]
             name_english    = anime_data[2]
             
-            if name_english == None and name_english == None:
+            if name_english == None and name_romaji == None:
                 continue
             elif name_english == None and name_romaji != None:
                 anime_db_names_dict.setdefault(id, []).append(name_romaji)
@@ -181,6 +178,7 @@ class AnimeDatabaseHandler:
             database_buffer[id] = dict(zip(db_columns, anime_data))
 
 
+
         # ===========================================
         # ======| RAPIDFUZZ MATCH ANIME NAMES |======
         # ===========================================
@@ -192,6 +190,12 @@ class AnimeDatabaseHandler:
                 if case_sensitive == True:
                     acc = rapidfuzz.fuzz.partial_ratio(anime_name, anime_name_db)
                 else:
+
+                    # print(anime_id)
+                    if int(anime_id) == 153734:
+                        
+                        print(f"{anime_name.lower()} vs {anime_name_db.lower()}, acc: {rapidfuzz.fuzz.partial_ratio(anime_name.lower(), anime_name_db.lower())}")
+
                     acc = rapidfuzz.fuzz.partial_ratio(anime_name.lower(), anime_name_db.lower())
 
                 # Anime with name found
@@ -201,7 +205,6 @@ class AnimeDatabaseHandler:
                     else:
                         results.append(database_buffer[anime_id])
         return results
-
 
     def search_anime_db_by_release_year(self, release_year, id_only=False) -> list:
         """
@@ -230,7 +233,7 @@ class AnimeDatabaseHandler:
         cur = self.__get_conn().cursor()
 
         if len(self.database_content) == 0:
-            sql = f"SELECT * FROM Anime_Records"
+            sql = f"SELECT * FROM Anime"
             anime_db_data = cur.execute(sql)
             db_columns = [c[0] for c in anime_db_data.description]
 
@@ -262,7 +265,7 @@ class AnimeDatabaseHandler:
         results = []
         for anime_data in anime_db_data:
             try:
-                id              = anime_data[0]
+                id                   = anime_data[0]
                 release_year_from_db = anime_data[4]
                 release_year_from_db = int(release_year_from_db.split('/')[-1])
             except:
@@ -285,7 +288,6 @@ class AnimeDatabaseHandler:
                     else:                   # Return anime data
                         results.append(database_buffer[id])
         return results
-
 
     def search_anime_db_by_release_season(self, release_season, id_only=False) -> list:
         """
@@ -313,7 +315,7 @@ class AnimeDatabaseHandler:
         cur = self.__get_conn().cursor()
 
         if len(self.database_content) == 0:
-            sql = f"SELECT * FROM Anime_Records"
+            sql = f"SELECT * FROM Anime"
             anime_db_data = cur.execute(sql)
             db_columns = [c[0] for c in anime_db_data.description]
 
@@ -359,7 +361,6 @@ class AnimeDatabaseHandler:
 
         return results
 
-
     def search_anime_db_by_genre(self, genre, id_only=False) -> list:
         """
         Search anime by genre(s) from the local database!
@@ -388,7 +389,7 @@ class AnimeDatabaseHandler:
         cur = self.__get_conn().cursor()
 
         if len(self.database_content) == 0:
-            sql = f"SELECT * FROM Anime_Records"
+            sql = f"SELECT * FROM Anime"
             anime_db_data = cur.execute(sql)
             db_columns = [c[0] for c in anime_db_data.description]
 
@@ -439,7 +440,6 @@ class AnimeDatabaseHandler:
                     results.append(database_buffer[id])
 
         return results
-
 
     def get_genre_list(self):
         """
@@ -516,12 +516,13 @@ class AnimeGenres:
 
 
 if __name__ == "__main__":
-    ad = AnimeDatabaseHandler()
+    ad = _AnimeDatabaseHandler()
 
     c = ad.search_anime_db_by_id(100049)
     c = ad.search_anime_db_by_name("code geass", id_only=True)
     c = ad.search_anime_db_by_release_year("2019", id_only=True)
     c = ad.search_anime_db_by_release_season("spring", id_only=True)
+
 
     ag = AnimeGenres()
     c = ad.search_anime_db_by_genre([ag.action, ag.drama, ag.mecha, ag.psychological, ag.sci_fi], id_only=True)

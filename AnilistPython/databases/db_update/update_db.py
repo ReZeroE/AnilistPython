@@ -23,9 +23,21 @@
 
 import os
 import sys
+import json
 import urllib.request
+from datetime import date
 
-class DatabaseUpdateTool():
+class _DatabaseUpdateTool:
+    """
+    AnilistPython anime database update handler class.
+    Provides functions for automatically triggering or manual local DB update.
+    """
+
+    def __init__(self, auto_update=True):
+        # Triggers automatic update
+        if (auto_update == True) and (self.trigger_update() == True):
+            self.update_db()
+
     def download_new_db(self):
         """
         Download new database from Github.
@@ -51,10 +63,39 @@ class DatabaseUpdateTool():
                 print(f"ERROR: Database failed to be updated.\n{e}", file=sys.stderr)
 
 
-if __name__ == "__main__":
-    d = DatabaseUpdateTool()
-    d.update_db()
+    def trigger_update(self):
+        """
+        Triggers automatic database update.
+        """
+        # Update database every 30 days
+        UPDATE_INTERVAL = 30
 
+        with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "db_status.json"), "r") as rf:
+            f = json.load(rf)
+
+        # Find days bewteen today and the last updated date
+        today = date.today()
+        last_updated_at = f['last_updated_at']
+        mdy = last_updated_at.split("/")
+        last_updated_at = date(int(mdy[2]), int(mdy[0]), int(mdy[1]))
+
+        if (today - last_updated_at).days > UPDATE_INTERVAL:
+            strtime = today.strftime("%m/%d/%Y")
+            d = dict()
+
+            d["last_updated_at"] = strtime
+            with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "db_status.json"), "w") as wf:
+                jobj = json.dumps(d, indent=2)
+                wf.write(jobj)
+            return True
+        else:
+            return False
+            
+
+if __name__ == "__main__":
+    d = _DatabaseUpdateTool()
+    # d.update_db()
+    # d.trigger_update()
 
 
 
