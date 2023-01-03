@@ -1,112 +1,224 @@
+
+
+
+
 # AnilistPython
 
 ![example workflow](https://github.com/ReZeroE/AnilistPython/actions/workflows/github-actions-demo.yml/badge.svg)
-![downloads](https://img.shields.io/github/workflow/status/ReZeroE/AnilistPython/GitHub%20Actions%20Demo)
 ![downloads](https://img.shields.io/pypi/dm/AnilistPython)
 ![licence](https://img.shields.io/github/license/ReZeroE/AnilistPython)
 ![Test](https://pepy.tech/badge/anilistpython)
 
-AniList Python library (anilist.co APIv2 wrapper) that allows you to **easily search up and retrieve anime, manga, animation studio, and character information.** This library is both beginner-friendly and offers the freedom for more experienced developers to interact with the retrieved information. Provides bot support.
+AniList Python library (anilist.co APIv2 wrapper) that allows you to easily **look up and retrieve anime, manga, and character information in Python**. This beginner-friendly library provides the perfect toolkits to support anime/manga Discord bots and other related software applications. MIT licensed.
 
 ![alt text](https://i.imgur.com/uGzW7vr.jpg)
 
-## Version 0.1.3 Overview
-This recent update for AnilistPython has resulted in a moderate change in the library's archetecture for increased efficiency and speed. Various features have also been added to the library. Listed below are some of the main additions and alterations made to the library.
+## Version 1.0.0 Overview (Stable Release)
+AnilistPython v1.0.0 is the first stable release of the AnilistPython library. (Finally!)
 
-**New features**:
-1. Anime search by genre, year, and/or average score (finally!)
-2. Offline anime retrieval support for anime - BETA
-3. Manga search support
-4. Package setup assitant (helps with package setup if any required package is missing)
+In this release, a number of previous features have been updated and optimized for efficiency and modularity. A handful of new features have been also added to the library as well. The current version of AnilistPython has two submodules (Anilist and AnimeDB), supporting both online and offline data look up and retrieval.
 
-Optimization and updates:
-1. The lib now has its own prebuilt anime database! 
-2. Anime, manga, and character search functions have all been optimized, making searches even faster!
-3. Improved deepsearch feature in `.get_anime()`. 
-4. Result's manual-select feature is now a parameter instead of a seperate function (see usage below). 
+```
+Anilist (supported by Anilist APIv2)
+  - Anime
+      - Search by id
+      - Search by name
+          - normal/deepsearch
+      - Terminal support (print anime info) 
+  - Manga
+      - Search by id
+      - Search by name
+      - Terminal support (print managa info)
+  - Character
+      - Search by id
+      - Search by name
+      - Terminal support (print character info)
+
+AnimeDB
+  - Anime
+    - Search by id
+    - Search by name
+    - Search by release year
+    - Search by season
+    - Utility functions (database update)
+```
  
 
-## How to use?
-**Step One:** Library Installation
+## Installation
+Library Installation From [PyPI](https://pypi.org/project/AnilistPython/):
 ``` python
-pip install AnilistPython==0.1.3
+pip install AnilistPython==1.0.0
+or
+pip3 install AnilistPython==1.0.0
 ```
-**Step Two:** Instance Creation
+
+
+
+
+## Usage Overview
+The AnilistPython library contains submodules. **(1) Anilist** supports online information lookup for Anime, Manga, and Character through the use of anilist.co APIv2. **(2) AnimeDB** supports offline information lookup for only anime, but offers number of functions for better data filtering.
+
+- **1. Anilist** (Online)
+   - Anime - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Anime))
+   - Manga - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Manga))
+   - Character - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Character))
+   
+- **2. AnimeDB** (Offline)
+     - Anime - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Anime))
+     
+
+***
+
+
+### 1. Anilist
 ```python
 from AnilistPython import Anilist
 anilist = Anilist()
 ```
-**Step Three**: Usage
-
-The AnilistPython library has been split into three distinct sections. Each section has a different set of functions used for retrieving data in that category. Please visit the full documentation for more info or skip to the **General Function Overview** section below for usage.
-- **Anime** - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Anime))
-- **Manga** - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Manga))
-- **Character** - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Character))
-
-## General Function Overview
-The following functions are supported by AnilistPyhon version 0.1.3. Only the default parameter has been displayed below. For more information, visit the [full documentation](https://github.com/ReZeroE/AnilistPython/wiki). 
+#### - Anime
 ```python
 # ANIME
-anilist.get_anime("Owari no Seraph")        # returns a dictionary containing info about owari no seraph
-anilist.get_anime_with_id(126830)           # returns a dictionary with Code Geass (ID:126830) info 
-anilist.get_anime_id("ReZero")              # returns Re:Zero's ID on Anilist
+anilist.get_anime("Owari no Seraph")        # returns a list of anime dictionaries about Owari no Seraph
+anilist.get_anime_with_id(126830)           # returns a dictionary with Code Geass' (ID:126830) info 
+anilist.get_anime_id("ReZero")              # returns Re:Zero's ID(s) on Anilist
 anilist.print_anime_info("Madoka Magica")   # prints all information regarding the anime Madoka Magica
+```
 
-# returns a list of anime with the given restrictions
-anilist.search_anime(genre=['Action', 'Adventure', 'Drama'], year=[2016, 2019], score=range(80, 95))
-
+#### - Manga
+```python
 #CHARACTER
-anilist.get_character("Emilia")             # returns a dictionary containing the info about Emilia-tan 
-anilist.get_character_with_id(13701)        # returns a dictionary with Misaka Mikoto (ID:13701) info
-anilist.get_character_id("Milim")           # returns character Milim's ID on Anilist
+anilist.get_character("Emilia")             # returns a list of Emilia-tan dictionaries 
+anilist.get_character_with_id(13701)        # returns a dictionary with Misaka Mikoto's (ID:13701) info
+anilist.get_character_id("Milim")           # returns character Milim's ID(s) on Anilist
 anilist.print_anime_info("Kirito")          # prints all information regarding the character Kirito
+```
 
+#### - Character
+```python
 # MANGA
-anilist.get_manga("Seraph of the End")      # returns a dictionary containing info about seraph of the end
-anilist.get_manga_with_id(113399)           # returns a dictionary with Tearmoon (ID:113399) info
-anilist.get_manga_id("Tearmoon Empire")     # returns Tearmoon Empire's ID on Anilist (manga)
+anilist.get_manga("Eighty Six")             # returns a list of Eighty-Six managa dictionaries
+anilist.get_manga_with_id(113399)           # returns a dictionary with Tearmoon's (ID:113399) info
+anilist.get_manga_id("Tearmoon Empire")     # returns Tearmoon Empire's ID(s) on Anilist (manga)
 anilist.print_manga_info("Tensei Slime")    # prints all information regarding the manga Tensei Slime
 ```
 
-Note: The feature for manully selecting the top three search results in the terminal is now controlled by a parameter (`manual_select`) in .get functions. For more information, please visit the full documentation. A sample program that has manual select enabled would be:
+***
+
+### 2. AnimeDB 
+As the name suggests, AnilistPython's AnimeDB submodule supports **OFFLINE** anime data look up and retrieval. 
+```python
+from AnilistPython import AnimeDB
+anime_db = AnimeDB(auto_update=True)
+```
+#### - Search by anime ID
+```python
+# Search anime with ID:138161
+anime_db.search_by_id(138161)
+```
+#### - Search by anime name
+```python
+# Search anime with name Re:Zero
+anime_db.search_by_name("Re:Zero")
+anime_db.search_by_name("Re:Zero", id_only=True, case_sensitive=True)
+```
+
+#### - Search by anime's release year(s)
+```python
+# Search anime with a release year of 2019
+anime_db.search_by_release_year(2019)
+anime_db.search_by_release_year(2019, id_only=True)
+
+# Search anime with a release year BETWEEN 2018 and 2022 (inclusive)
+anime_db.search_by_release_year(range(2018, 2022))
+anime_db.search_by_release_year(range(2018, 2022), id_only=True)
+
+# Search anime with a release year of 2018 OR 2020 
+anime_db.search_by_release_year([2018, 2020])
+anime_db.search_by_release_year([2018, 2020], id_only=True)
+```
+
+#### - Search by anime's genre(s)
+```python
+# Search anime with generes mahou shoujo AND drama
+anime_db.search_by_genre(['mahou shoujo', 'drama'])
+anime_db.search_by_genre(['mahou shoujo', 'drama'], id_only=True)
+```
+#### - Search by anime's season
+```python
+# Search anime with a release season of Spring
+anime_db.search_by_season("spring")
+anime_db.search_by_season("spring", id_only=True)
+```
+***
+
+## Sample Programs
+#### Sample Program 1: Simple anime lookup for the name Re:Zero
+```python
+from AnilistPython import Anilist
+anilist = Anilist()
+
+# Search anime "Re:Zero" for 3 matching results
+res = anilist.get_anime("Re:Zero", count=3)
+
+# Get first result (res is a list)
+first_result = res[0]
+
+# Print the anime's name in Romaji, its starting/ending times, and its popularity
+print(first_result['name_romaji'])
+print(first_result['starting_time'])
+print(first_result['ending_time'])
+print(first_result['popularity'])
+```
+```
+STDOUT:
+Re:Zero kara Hajimeru Isekai Seikatsu
+4/4/2016
+9/19/2016
+366192
+```
+
+#### Sample Program 2: Search anime with the following restrictions:
+
+- Released between **2019 - 2023**
+- Released in the season **Fall**
+- Must have the genre labels: **mystery, drama, and adventure**
+
+Note: Anime lookup with data filtering is only supported by AnimeDB, thus we need to use AnimeDB for lookup. 
 
 ```python
-anilist.get_anime("Owari no Seraph", manual_select=True)
+from AnilistPython import Anilist, AnimeDB
+anilist  = Anilist()
+anime_db = AnimeDB()
+
+# Get the anime IDs that satisfy each restriction
+res_year    = anime_db.search_by_release_year(range(2019, 2023), id_only=True)
+res_season  = anime_db.search_by_season("Fall", id_only=True)
+res_genre   = anime_db.search_by_genre(["mystery", "drama", "adventure"], id_only=True)
+
+# Find the intersection between the three lists of IDs to get the anime that satisfy all three conditions
+req_satisfied_ids = list(set(res_year) & set(res_season) & set(res_genre))
+
+# Get anime data with the IDs from Anilist
+for anime_id in req_satisfied_ids:
+    print(anilist.get_anime_with_id(anime_id))
 ```
 
 If an error occurs while running AnilistPython, please refer the to the [Error Fixes](https://github.com/ReZeroE/AnilistPython#error-fixes) section.
 
 ## Discord Bot Support
-AnilistPython was originially designed to support various Discord Bot features in relation to anime, but throughout the course of its development, more features became available for a wide range of applications other than Discord bots. With that been said, the current version of AnilistPython has further optimized its functions for bot support. From the pre-formatted JSON file upon data retrieval to offline database support (see full documentation), it is now able to be implemented in bots with ease. 
-
-Upcoming AnilistPython Version 0.2.0 will provide functions to generate pre-formated Discord embeds (Anime, Manga, Character embeds) as well as other features that make AnilistPython bot implementations easy to use. 
-
 Sample anime discord bot supported by AnilistPython V0.1.3: [Anime C.C. Discord Bot](https://github.com/ReZeroE/Anime-Discord-Bot)
 
-Note: Please make sure that parameter `manual_select` has not been set to True in bot implementations. (False by default)
 
-## Upcoming Version 0.1.4 (Release delayed)
-The upcoming version 0.1.4 of the AnilistPython lib will include the following features and fixes.
-- SQLite3 database support
-- Partial Discord bot embed support 
-- Minor auto lib setup error fix
-- New data fields for `.get_anime()`:
-    - isAdult
-    - popularity
-    - isLicensed
-    - countryOfOrigin
-    - duration
-    - updatedAt
-    - source
-    - siteUrl
- - Beta Discord embed support
+## License
 
-## Error Fixes
-1. `ModuleNotFoundError` for `requests`
-   - This error has been reported and will be fixed in the upcoming version.
-   - To fix the error, run `pip install requests` or `pip3 install requests` 
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/MIT_logo.svg/220px-MIT_logo.svg.png" align="left" width="150"/>
 
-If you issue is not present here, feel free to [open a new issue](https://github.com/ReZeroE/AnilistPython/issues) for help!
+<ul>
+ - MIT Licensed
+</ul>
+
+<br clear="left"/>
+
 
 ## Credits
 Lead Developer: Kevin L. (ReZeroE)
