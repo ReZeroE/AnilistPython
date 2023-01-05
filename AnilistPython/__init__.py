@@ -98,16 +98,17 @@ class Anilist:
         :rtype: int
         '''      
         if auto_format:
-            id_list = self.anime.getAnimeID(anime_name, count, manual_select)
+            id_list = self.anime.getAnimeIDs(anime_name, count, manual_select)
             if len(id_list) == 1: return id_list[0]
         else:
-            return self.anime.getAnimeID(anime_name, count, manual_select)
+            return self.anime.getAnimeIDs(anime_name, count, manual_select)
 
     def get_anime(self, anime_name, count=3, deepsearch=False, manual_select=False) -> list:
         '''
         Retrieve the anime info in the form of a dictionary.
 
         :param anime_name: the name of the anime
+        :param count: The number of results to return in the list
         :param deepsearch: deepsearch control value. False by default.
         :manual_select: prompts the user the top three results to select in the terminal
         :return: A list of anime data dictionaries

@@ -1,12 +1,7 @@
 from itertools import count
-from __init__ import Anilist, _AnimeDatabaseHandler
-a = Anilist()
+from __init__ import Anilist, AnimeDB
+anilist  = Anilist()
+anime_db = AnimeDB()
 
-
-
-# ad = AnimeDatabase(auto_update=False)
-
-
-
-# print(ad.search_by_name("code geass", id_only=True, case_sensitive=False))
-
+ani_list = anilist.print_anime_info("no game no life", count=1)
+print(ani_list)

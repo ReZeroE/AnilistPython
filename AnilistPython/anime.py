@@ -34,7 +34,6 @@ class Anime:
         self.extractInfo = ExtractInfo(access_info, activated)
         self.extractID = ExtractID(access_info, activated)
 
-
     def getAnime(self, anime_name, count, manual_select=False) -> dict:
         '''
         Retrieve anime info in the form of a JSON object.
@@ -110,7 +109,6 @@ class Anime:
 
         return results
 
-
     def getAnimeWithID(self, anime_id) -> dict:
         '''
         Retrieve anime info in the form of a JSON object.
@@ -179,7 +177,6 @@ class Anime:
         }
 
         return anime_dict
-
 
     def getAnimeIDs(self, anime_name, count, manual_select=False):
         '''
