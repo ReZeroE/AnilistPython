@@ -67,8 +67,8 @@ class _DatabaseUpdateTool:
         """
         Triggers automatic database update.
         """
-        # Update database every 30 days
-        UPDATE_INTERVAL = 30
+        # Update database every 14 days
+        UPDATE_INTERVAL = 14
 
         with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "db_status.json"), "r") as rf:
             f = json.load(rf)
