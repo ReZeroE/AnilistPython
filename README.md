@@ -86,20 +86,20 @@ anilist.print_anime_info("Madoka Magica")   # prints all information regarding t
 
 #### - Manga
 ```python
-#CHARACTER
-anilist.get_character("Emilia")             # returns a list of Emilia-tan dictionaries 
-anilist.get_character_with_id(13701)        # returns a dictionary with Misaka Mikoto's (ID:13701) info
-anilist.get_character_id("Milim")           # returns character Milim's ID(s) on Anilist
-anilist.print_anime_info("Kirito")          # prints all information regarding the character Kirito
-```
-
-#### - Character
-```python
 # MANGA
 anilist.get_manga("Eighty Six")             # returns a list of Eighty-Six managa dictionaries
 anilist.get_manga_with_id(113399)           # returns a dictionary with Tearmoon's (ID:113399) info
 anilist.get_manga_id("Tearmoon Empire")     # returns Tearmoon Empire's ID(s) on Anilist (manga)
 anilist.print_manga_info("Tensei Slime")    # prints all information regarding the manga Tensei Slime
+```
+
+#### - Character
+```python
+#CHARACTER
+anilist.get_character("Emilia")             # returns a list of Emilia-tan dictionaries 
+anilist.get_character_with_id(13701)        # returns a dictionary with Misaka Mikoto's (ID:13701) info
+anilist.get_character_id("Milim")           # returns character Milim's ID(s) on Anilist
+anilist.print_anime_info("Kirito")          # prints all information regarding the character Kirito
 ```
 
 ***
