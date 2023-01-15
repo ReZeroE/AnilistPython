@@ -3,22 +3,22 @@ try:
     import time
     import requests
 
-    from anime import Anime
-    from character import Character
-    from manga import Manga
-    from deep_search import DeepSearch
+    from .anime import Anime
+    from .character import Character
+    from .manga import Manga
+    from .deep_search import DeepSearch
+    from .user import User
+    from .databases.database_anime_retrieval import DatabaseSearcher
+    from .databases.search_engine import SearchEngine
 
-    from databases.database_anime_retrieval import DatabaseSearcher
-    from databases.search_engine import SearchEngine
+    from .anilistpython_info import AnilistPythonInfo
 
-    from anilistpython_info import AnilistPythonInfo
-
-    from logs.log_data import LogData
+    from .logs.log_data import LogData
 
 
 except ModuleNotFoundError:
 
-    from logs.setup_module import Setup 
+    from .logs.setup_module import Setup 
     setup = Setup()
 
 
@@ -49,7 +49,7 @@ class Anilist:
         self.anime = Anime(self.access, activated)
         self.character = Character(self.access, activated)
         self.manga = Manga(self.access, activated)
-
+        self.user = User(self.access, activated)
         self.log_data = LogData()
 
 
@@ -231,3 +231,14 @@ class Anilist:
         '''
 
         self.manga.displayMangaInfo(manga_name, manual_select)
+
+    def get_user_activity(self, page:int , perpage:int) -> list:
+        '''
+        Retrieve user activity info in the form of a json object.
+        Retrieve json object will be reformatted in a easily accessable json obj.
+        :param page: the page of user activity
+        :param perpage: how many items per page
+        :return: parsed list containing the user activity
+        :rtype: list
+        '''
+        return self.user.GetUserActivity(page, perpage)

@@ -2,7 +2,7 @@ import os
 import datetime
 import json
 import requests
-from query_strings import QSData
+from .query_strings import QSData
 qsObj = QSData()
 
 class ExtractInfo:
@@ -186,3 +186,44 @@ class ExtractInfo:
             return None
         else:
             return extracted_data
+
+    def user_activity(self, page, perpage):
+        """
+        A Function to get the activity of the currently logged in user.
+
+        :param page: the page of user activity
+        :param perpage: how many items per page
+        """
+        if self.status == False:
+            raise Exception("Current function status is False.")
+        
+        token = self.access['token']
+        if not token:
+            return None
+        else:
+            headers = {
+                "Authorization": f"Bearer {token}",
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+            req = requests.post(self.access['apiurl'], headers=headers, json={'query': qsObj.user_get_idQS, 'variables': {}})
+            if req.status_code != 200:
+                raise Exception(f"Data post unsuccessful. ({req.status_code})")
+            else:
+                try:
+                    extracted_user = json.loads(req.text)
+                    id_val2 = {"id": extracted_user["data"]["Viewer"]["id"], "page": page, "perPage": perpage}
+                    req2 = requests.post(self.access['apiurl'], headers=headers, json={'query': qsObj.user_activyQS, 'variables': id_val2})
+                    if req2.status_code != 200:
+                        raise Exception(f"Data post unsuccessful. ({req.status_code})")
+                    else:
+                        try:
+                            extracted_data = json.loads(req2.text)
+                        except ValueError:
+                            return None
+                        except TypeError:
+                            return None
+                        else:
+                            return extracted_data
+                except:
+                    return None
