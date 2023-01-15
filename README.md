@@ -2,7 +2,9 @@
 
 
 
-# AnilistPython
+# AnilistPython 
+
+Warning: This documentation is incompleted.
 
 ![example workflow](https://github.com/ReZeroE/AnilistPython/actions/workflows/github-actions-demo.yml/badge.svg)
 ![downloads](https://img.shields.io/pypi/dm/AnilistPython)
@@ -16,10 +18,10 @@ AniList Python library (anilist.co APIv2 wrapper) that allows you to easily **lo
 ## Version 1.0.0 Overview (Stable Release)
 AnilistPython v1.0.0 is the first stable release of the AnilistPython library. (Finally!)
 
-In this release, a number of previous features have been updated and optimized for efficiency and modularity. A handful of new features have been also added to the library as well. The current version of AnilistPython has two submodules (Anilist and AnimeDB), supporting both online and offline data look up and retrieval.
+In this release, a number of previous features have been updated and optimized for efficiency and modularity. A handful of new features have been also added to the library as well. The current version of AnilistPython has two submodules (Anilist and AnimeDB), featuring both online and offline data look up and retrieval.
 
 ```
-Anilist (supported by Anilist APIv2)
+Anilist (Online)
   - Anime
       - Search by id
       - Search by name
@@ -34,7 +36,7 @@ Anilist (supported by Anilist APIv2)
       - Search by name
       - Terminal support (print character info)
 
-AnimeDB
+AnimeDB (Offline)
   - Anime
     - Search by id
     - Search by name
@@ -43,28 +45,51 @@ AnimeDB
     - Utility functions (database update)
 ```
  
+ 
+ <br>
+ 
+ 
+ ## Navigation Links
+  - [Library Installation](https://github.com/ReZeroE/AnilistPython/wiki/Anime)
+  - [Library Usage](https://github.com/ReZeroE/AnilistPython/wiki/Anime)
+  - [Example Usages](https://github.com/ReZeroE/AnilistPython/wiki/Anime)
+  - [Discord Bot Support](https://github.com/ReZeroE/AnilistPython/wiki/Anime)
+  
+ 
+  
+ 
+
+<br>
 
 ## Installation
-Library Installation From [PyPI](https://pypi.org/project/AnilistPython/):
+**Method 1**: Library Installation From [PyPI](https://pypi.org/project/AnilistPython/):
 ``` python
 pip install AnilistPython==1.0.0
-or
-pip3 install AnilistPython==1.0.0
+```
+**Method 2**: Local Library Installation
+```shell
+git clone https://github.com/ReZeroE/AnilistPython.git
+cd AnilistPython
+pip install .
 ```
 
+<br>
 
 
-
-## Usage Overview
+## How To Use
 The AnilistPython library contains submodules. **(1) Anilist** supports online information lookup for Anime, Manga, and Character through the use of anilist.co APIv2. **(2) AnimeDB** supports offline information lookup for only anime, but offers number of functions for better data filtering.
 
+
+Still working on this....
+
+
 - **1. Anilist** (Online)
-   - Anime - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Anime))
-   - Manga - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Manga))
-   - Character - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Character))
+   - Anime - | [Full Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Anime) |
+   - Manga - | [Full Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Manga) |
+   - Character - | [Full Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Character) |
    
 - **2. AnimeDB** (Offline)
-     - Anime - ([Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Anime))
+     - Anime - | [Full Documentation](https://github.com/ReZeroE/AnilistPython/wiki/Anime) |
      
 
 ***
@@ -150,17 +175,19 @@ anime_db.search_by_season("spring")
 anime_db.search_by_season("spring", id_only=True)
 ```
 
-#### - Utility: Update DB
+#### - *Utility: Update DB
 ```python
 # Download the newest DB from Github
 anime_db.update_db()
 anime_db.update_db(verbose=False)
 ```
 
-***
+
+<br>
 
 ## Sample Programs
-#### Sample Program 1: Simple anime lookup for the name Re:Zero
+#### Sample Program 1: 
+ - Simple anime lookup for the name `Re:Zero`
 ```python
 from AnilistPython import Anilist
 anilist = Anilist()
@@ -185,11 +212,14 @@ Re:Zero kara Hajimeru Isekai Seikatsu
 366192
 ```
 
-#### Sample Program 2: Search anime with the following restrictions:
+***
 
-- Released between **2019 - 2023**
-- Released in the season **Fall**
-- Must have the genre labels: **mystery, drama, and adventure**
+#### Sample Program 2: 
+
+- Search anime with the following restrictions:
+   - Released between **2019 - 2023**
+   - Released in the season **Fall**
+   - Must have the genre labels: **mystery, drama, and adventure**
 
 Note: Anime lookup with data filtering is only supported by AnimeDB, thus we need to use AnimeDB for lookup. 
 
@@ -213,6 +243,10 @@ for anime_id in req_satisfied_ids:
 
 If an error occurs while running AnilistPython, please refer the to the [Error Fixes](https://github.com/ReZeroE/AnilistPython#error-fixes) section.
 
+
+<br>
+
+
 ## Discord Bot Support
 Sample anime discord bot supported by AnilistPython V0.1.3: [Anime C.C. Discord Bot](https://github.com/ReZeroE/Anime-Discord-Bot)
 
@@ -228,7 +262,10 @@ Sample anime discord bot supported by AnilistPython V0.1.3: [Anime C.C. Discord 
 <br clear="left"/>
 
 
+
 ## Credits
 Lead Developer: Kevin L. (ReZeroE)
 
 Special thanks to the AniList's ApiV2 GraphQL Dev team for making this possible. 
+
+
