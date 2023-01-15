@@ -20,27 +20,21 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+#
+# Developed by samuelmarc [https://github.com/samuelmarc]
 
+import time
+import requests
+from .retrieve_data import ExtractInfo
 
-import urllib.error as ue
-import urllib.request as ur
+class User:
+    def __init__(self, access_info, activated=True):
+        self.extractInfo = ExtractInfo(access_info, activated)
 
-class InternetChecker:
-    '''
-        Identifies the internet status of the user. Prompts the user to use the provided local database if their
-        internet latency is too high.
-    '''
-    def internet_latency_check(self) -> bool:
-        '''
-            Attempts to access google.com with an one second timeout theshold.
-            :rtype: bool
-        '''
-        try:
-            s = ur.urlopen("https://google.com/", timeout=1)
-            return True
-        except ue.URLError as ex:
-            return False
-
-if __name__ == "__main__":
-    ic = InternetChecker()
-    print(ic.internet_latency_check())
+    def getUserActivity(self, page, perpage):
+        activity = self.extractInfo.user_activity(page, perpage)
+        activity_data = activity["data"]
+        if len(activity_data) > 0:
+            return activity_data
+        else:
+            return None

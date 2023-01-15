@@ -35,17 +35,18 @@ import time
 import requests
 
 # Supported Anilist Submodules
-from anime      import Anime
-from character  import Character
-from manga      import Manga
+from .anime      import Anime
+from .character  import Character
+from .manga      import Manga
+from .user       import User
 
 # Database Submodules
-from databases.db_update.update_db          import _DatabaseUpdateTool
-from databases.db_search.anime_db_handler   import _AnimeDatabaseHandler
-from databases.db_search.anime_db_handler   import AnimeGenres
+from .databases.db_update.update_db          import _DatabaseUpdateTool
+from .databases.db_search.anime_db_handler   import _AnimeDatabaseHandler
+from .databases.db_search.anime_db_handler   import AnimeGenres
 
 # Utilities
-from utils.deepsearch.deep_search import DeepSearch
+from .utils.deepsearch.deep_search import DeepSearch
 
 
 # ================================
@@ -78,6 +79,7 @@ class Anilist:
         self.anime      = Anime(self.access, activated)
         self.character  = Character(self.access, activated)
         self.manga      = Manga(self.access, activated)
+        self.user       = User(self.access, activated)
         self.version    = __version__
 
     def help(self):
@@ -246,6 +248,18 @@ class Anilist:
 
         self.manga.displayMangaInfo(manga_name, count, manual_select, title_colored)
 
+
+    # User =====================================================================================================================
+    def get_user_activity(self, page:int , perpage:int) -> list:
+        '''
+        Retrieve user activity info in the form of a json object.
+
+        :param page: the page of user activity
+        :param perpage: how many items per page
+        :return: parsed list containing the user activity
+        :rtype: list
+        '''
+        return self.user .getUserActivity(page, perpage)
 
 
 # =======================================

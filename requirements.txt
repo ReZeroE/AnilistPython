@@ -1,6 +1,5 @@
 requests
 pytest
-numpy
 tabulate
 termcolor
 rapidfuzz

@@ -25,7 +25,7 @@
 import json
 import requests
 
-from constants import *
+from .constants import *
 
 class ExtractID:
     def __init__(self, access, status):

@@ -21,6 +21,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+# Standalone DB Tool
+# python3 dbtool.py
+
 import sys
 import os
 import sqlite3

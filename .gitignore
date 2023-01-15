@@ -3,5 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Ignore Manual Testing Files
+# Ignore testing files
 *z_manual_tests.py
+
+# Ignore Python module build files
+AnilistPython/AnilistPython.egg-info
+build

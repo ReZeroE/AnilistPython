@@ -25,9 +25,9 @@
 from termcolor import colored
 from tabulate import tabulate
 
-from retrieve_data import ExtractInfo
-from retrieve_id import ExtractID
-from anilist_exceptions import MangaNotFoundError
+from .retrieve_data import ExtractInfo
+from .retrieve_id import ExtractID
+from .anilist_exceptions import MangaNotFoundError
 
 class Manga:
     def __init__(self, access_info, activated=True):

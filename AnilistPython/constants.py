@@ -50,7 +50,6 @@ ANIME_QUERY_FIELDS = [
     "siteUrl"
 ]
 
-
 ANIME_DICT_KEYS = [
     "name_romaji",
     "name_english",
@@ -76,7 +75,10 @@ ANIME_DICT_KEYS = [
 ]
 
 
-## Anilist APIv2 GraphQL Query Strings 
+# =============================================
+# ===| Anilist APIv2 GraphQL Query Strings |===
+# =============================================
+# DATA QUERY
 ANIME_INFO_QUERY = """\
     query ($id: Int) {
         Media(id: $id, type: ANIME) {
@@ -224,7 +226,101 @@ REVIEW_INFO_QUERY = """\
     }
 """
 
+USER_INFO_QUERY = """\
+    query($id:Int,$type:ActivityType,$page:Int,$perPage: Int){
+        Page(page:$page,perPage:$perPage){
+            pageInfo{
+                total
+                perPage
+                currentPage
+                lastPage
+                hasNextPage
+            }
+            activities(userId:$id,type:$type,sort:[PINNED,ID_DESC]){
+            ... on ListActivity{
+                id
+                type
+                replyCount
+                status
+                progress
+                isLocked
+                isSubscribed
+                isLiked
+                isPinned
+                likeCount
+                createdAt
+                user{
+                    id
+                    name
+                    avatar{
+                        large
+                    }
+                }
+                media{
+                    id
+                    type
+                    status(version:2)
+                    isAdult
+                    bannerImage
+                    title{
+                        userPreferred
+                    }
+                    coverImage{
+                        large
+                    }
+                }
+            }
+            ... on TextActivity{
+                id
+                type
+                text
+                replyCount
+                isLocked
+                isSubscribed
+                isLiked
+                isPinned
+                likeCount
+                createdAt
+                user{
+                    id
+                    name
+                    avatar{
+                        large
+                    }
+                }
+            }
+            ... on MessageActivity{
+                id
+                type
+                message
+                replyCount
+                isPrivate
+                isLocked
+                isSubscribed
+                isLiked
+                likeCount 
+                createdAt
+                user:recipient{
+                    id
+                }
+                messenger{
+                    id
+                    name
+                    donatorTier
+                    donatorBadge
+                    moderatorRoles
+                    avatar{
+                        large
+                    }
+                }
+            }
+        }
+    }
+}
+"""
 
+
+# ID QUERY
 ANIME_ID_QUERY = """\
     query ($query: String, $page: Int, $perpage: Int) {
         Page (page: $page, perPage: $perpage) {
@@ -321,3 +417,13 @@ STUDIO_ID_QUERY = """\
         }
     }
 """
+
+USER_ID_QUERY = """\
+    query{
+        Viewer{
+            id
+        }
+    }
+"""
+
+        

@@ -1,2 +1,2 @@
-recursive-include AnilistPython/logs *.json
-recursive-include AnilistPython/databases/anime_database_files *.json
+recursive-include . *.json
+recursive-include . *.sqlite3
