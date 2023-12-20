@@ -187,7 +187,7 @@ class Anilist:
         self.character.displayCharacterInfo(character_name, manual_select)
 
     # Manga =====================================================================================================================
-    def get_manga_id(self, manga_name, manual_select=False) -> int:
+    def get_manga_id(self, manga_name, manual_select=False, eliminateLNconflict=True) -> int:
         '''
         Displays all character data.
         Auto formats the displayed version of the data.
@@ -197,9 +197,9 @@ class Anilist:
         :return: the id of the manga
         :rtype: int
         '''
-        return self.manga.getMangaID(manga_name, manual_select)
+        return self.manga.getMangaID(manga_name, manual_select, eliminateLNconflict)
 
-    def get_manga(self, manga_name, manual_select=False) -> dict:
+    def get_manga(self, manga_name, manual_select=False, eliminateLNconflict=True) -> dict:
         '''
         Retrieve manga info in the form of a dictionary.
 
@@ -209,7 +209,7 @@ class Anilist:
         :rtype: dict
         '''
 
-        return self.manga.getManga(manga_name, manual_select)
+        return self.manga.getManga(manga_name, manual_select, eliminateLNconflict)
 
     def get_manga_with_id(self, manga_id) -> dict:
         '''
