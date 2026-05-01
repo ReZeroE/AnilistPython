@@ -9,7 +9,7 @@ class Manga:
         self.extractID = ExtractID(access_info, activated)
 
 
-    def getManga(self, manga_name, manual_select=False):
+    def getManga(self, manga_name, manual_select=False, eliminateLNconflict=True):
         '''
         Retrieve character info in the form of a json object.
         Retrieve json object will be reformatted in a easily accessable json obj.
@@ -20,45 +20,11 @@ class Manga:
         '''
         manga_dict = {}
 
-        manga_id = self.getMangaID(manga_name, manual_select)
+        manga_id = self.getMangaID(manga_name, manual_select, eliminateLNconflict)
         if manga_id == -1:
             return None
 
-        data = self.extractInfo.manga(manga_id)
-        media_lvl = data['data']['Media']
-        
-        manga_dict['name_romaji'] = media_lvl['title']['romaji']
-        manga_dict['name_english'] = media_lvl['title']['english']
-
-        start_year = media_lvl['startDate']['year']
-        start_month = media_lvl['startDate']['month']
-        start_day = media_lvl['startDate']['day']
-
-        end_year = media_lvl['endDate']['year']
-        end_month = media_lvl['endDate']['month']
-        end_day = media_lvl['endDate']['day']
-
-        manga_dict['starting_time'] = f'{start_month}/{start_day}/{start_year}'
-        manga_dict['ending_time'] = f'{end_month}/{end_day}/{end_year}'
-
-        manga_dict['cover_image'] = media_lvl['coverImage']['large']
-        manga_dict['banner_image'] = media_lvl['bannerImage']
-
-        manga_dict['release_format'] = media_lvl['format']
-        manga_dict['release_status'] = media_lvl['status']
-
-        manga_dict['chapters'] = media_lvl['chapters']
-        manga_dict['volumes'] = media_lvl['volumes']
-
-        manga_dict['desc'] = media_lvl['description']
-
-        manga_dict['average_score'] = media_lvl['averageScore']
-        manga_dict['mean_score'] = media_lvl['meanScore']
-
-        manga_dict['genres'] = media_lvl['genres']
-        manga_dict['synonyms'] = media_lvl['synonyms']
-
-        return manga_dict
+        return self.getMangaWithID(manga_id)
 
 
     def getMangaWithID(self, manga_id) -> dict:
@@ -109,7 +75,7 @@ class Manga:
         return manga_dict
 
 
-    def getMangaID(self, manga_name, manual_select=False):
+    def getMangaID(self, manga_name, manual_select=False, eliminateLNconflict=True):
         '''
         Retrieves the character ID on Anilist.
 
@@ -118,7 +84,7 @@ class Manga:
         :rtype: int
         '''
 
-        if manual_select == False:
+        if not manual_select:
             manga_list = []
             data = self.extractID.manga(manga_name)
             for i in range(len(data['data']['Page']['media'])):
@@ -136,13 +102,17 @@ class Manga:
             return manga_ID
 
 
-        elif manual_select == True:
+        elif manual_select:
             max_result = 0
             counter = 0 # number of displayed results from search
             data = self.extractID.manga(manga_name)
             for i in range(len(data['data']['Page']['media'])):
                 curr_manga = data['data']['Page']['media'][i]['title']['romaji']
-                print(f"{counter + 1}. {curr_manga}")
+                if eliminateLNconflict: # Left on by default but just in case if someone is short on time or something
+                    print(f"{counter + 1}. {curr_manga}" + (" (Light Novel)" if self.is_light_novel(data['data']['Page']['media'][i]['id']) else ""))
+                elif not eliminateLNconflict:
+                    print(f"{counter + 1}. {curr_manga}")
+
                 max_result = i + 1
                 counter += 1
             
@@ -192,3 +162,9 @@ class Manga:
             for key, value in manga_dict.items():
                 print(f"{arr[counter]}: {value}")
                 counter += 1
+    
+    def is_light_novel(self, id) -> bool:
+        data = self.extractInfo.manga(id)
+        media_lvl = data['data']['Media']
+        if media_lvl['format'] == 'NOVEL':
+            return True

@@ -23,23 +23,7 @@ class Character:
         if character_id == -1:
             return None
 
-        data = self.extractInfo.character(character_id)
-        character_lvl = data['data']['Character']
-
-        first_name = character_lvl['name']['first']
-        last_name = character_lvl['name']['last']
-        native_name = character_lvl['name']['native']
-
-        desc = character_lvl['description']
-        image = character_lvl['image']['large']
-
-        character_dict = {"first_name": first_name,
-                        "last_name": last_name,
-                        "native_name": native_name,
-                        "desc": desc,
-                        "image": image,}
-
-        return character_dict
+        return self.getCharacterWithID(character_id)
 
 
     def getCharacterWithID(self, character_id) -> dict:

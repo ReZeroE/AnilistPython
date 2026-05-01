@@ -23,54 +23,7 @@ class Anime:
         if anime_id == -1:
             return None
 
-        data = self.extractInfo.anime(anime_id)
-        media_lvl = data['data']['Media']
-
-        name_romaji = media_lvl['title']['romaji']
-        name_english = media_lvl['title']['english']
-
-        start_year = media_lvl['startDate']['year']
-        start_month = media_lvl['startDate']['month']
-        start_day = media_lvl['startDate']['day']
-
-        end_year = media_lvl['endDate']['year']
-        end_month = media_lvl['endDate']['month']
-        end_day = media_lvl['endDate']['day']
-
-        starting_time = f'{start_month}/{start_day}/{start_year}'
-        ending_time = f'{end_month}/{end_day}/{end_year}'
-
-        cover_image = media_lvl['coverImage']['large']
-        banner_image = media_lvl['bannerImage']
-
-        airing_format = media_lvl['format']
-        airing_status = media_lvl['status']
-        airing_episodes = media_lvl['episodes']
-        season = media_lvl['season']
-
-        desc = media_lvl['description']
-
-        average_score = media_lvl['averageScore']
-        genres = media_lvl['genres']
-
-        next_airing_ep = media_lvl['nextAiringEpisode']
-
-        anime_dict = {"name_romaji": name_romaji,
-                    "name_english": name_english,
-                    "starting_time": starting_time,
-                    "ending_time": ending_time,
-                    "cover_image": cover_image,
-                    "banner_image": banner_image,
-                    "airing_format": airing_format,
-                    "airing_status": airing_status,
-                    "airing_episodes": airing_episodes,
-                    "season": season,
-                    "desc": desc,
-                    "average_score": average_score,
-                    "genres": genres,
-                    "next_airing_ep": next_airing_ep,}
-
-        return anime_dict
+        return self.getAnimeWithID(anime_id)
 
         
     def getAnimeWithID(self, anime_id) -> dict:
@@ -143,7 +96,7 @@ class Anime:
         '''
 
         # if manual select is turned off ============================================================================
-        if manual_select == False:
+        if not manual_select:
             anime_list = []
             data = self.extractID.anime(anime_name)
             for i in range(len(data['data']['Page']['media'])):
@@ -159,7 +112,7 @@ class Anime:
             return anime_ID
 
         # if manual select is turned on =============================================================================
-        elif manual_select == True:
+        elif manual_select:
             data = self.extractID.anime(anime_name)
             max_result = 0
             counter = 0 # number of displayed results from search
